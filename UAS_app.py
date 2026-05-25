@@ -70,7 +70,7 @@ class GGBitesGraph:
                 "Pizza",
                 "Steak",
                 "Sate Ayam",
-                "Soto"
+                "Soto",
                 "Sushi"
             ],
 
