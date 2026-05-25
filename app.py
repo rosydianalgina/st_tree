@@ -8,99 +8,98 @@ class KategoriNode:
 
     def tambah_sub(self, node_kategori):
         self.sub_kategori.append(node_kategori)
+        return node_kategori # men gembalikan node agar mudah disambung(chaining)
 
-#mengubah fungsi print menjadi return string agar bisa ditampilkan di web
-    def dapatkan_tree_string(self, level=0):
+    def tambahkan_tree_string(self, level=0):
         #mengatur spasi  agar terlihat bertingkat
         indentasi = "    "  *level
-        simbol ="↳ " if level > 0 else "📦"
+        simbol ="↳" if level > 0 else "📦"
         hasil = f"{indentasi}{simbol}{self.nama}\n"
 
         for sub in self.sub_kategori:
-            hasil += sub.dapatkan_tree_string(level+1)
-        return hasil
+            hasil += sub.dapatkan_tree_string(level + 1)
+            return hasil 
 
-    def cari_node(self,target_nama):
-        #mencari node spesifik untuk menambahkan anak dibawahnya
+    def cari_node(self, target_nama):
+        #mencari node spesifik untuk menambahkn anak di bawahnya 
         if self.nama.lower() == target_nama.lower():
             return self
-
+        
         for sub in self.sub_kategori:
-            hasil =sub.cari_node(target_nama)
+            hasil = sub.cari_node(target_nama)
             if hasil:
-                return hasil
+                return hasil 
         return None
-
-    def cari_jalur(self, target,path=""):
-        #mencari  jalur lengkap (breadcrumb) seperti study kasus sebulumnya
-        jalur_saat_ini = path + " > "+ self.nama if path else self.nama
+    
+    def cari_jalur(self, target, path=""):
+        #Mencari jalur lengkap (breadcrumb) seperti kasus sebelumnya 
+        jalur_saat_ini = path +">"+ self.nama if path else self.nama
 
         if self.nama.lower() == target.lower():
             return jalur_saat_ini
-
+        
         for sub in self.sub_kategori:
-            hasil = sub.cari_jalur(target,jalur_saat_ini)
-            if hasil : 
-                return hasil
+            hasil = sub.cari_jalur(target, jalur_saat_ini)
+            if hasil:
+                return hasil 
         return None
 
-#===========================
-#PROGRAM UTAMA 
-#===========================
+#=============================================
+# PROGRAM UTAMA (INTERAKTIF)
+#=============================================
+st.set_page_config(page_title="Struktur Kategori", page_icon="+")
 
+st.title("Pembuat Struktur Kategori")
+st.write("Aplikasi Interaktif untuk mensimulasikan struktur data Tree.")
 
-st.set_page_config(page_title ="Struktur Kategori", page_icon= "+")
+# Inisialisasi session state untuk menyimpan struktur Tree agar tidak hilang saat halaman di-refresh
+if 'root' not in st.session_state:
+    st.session_state.root = None
 
-st.title("Pembuat struktur kategori")
-st.write("Aplikasi interaktif untuk mensimulasi struktur data tree")
-
-#inisialisasi session state untuk menyimpan struktur tree agar tidak hilang 
-if 'root' not in set.session_state:
-    st.session_state.root= None
-
-#jika root belum dibuat, tampilkan form pembuatan root
+# Jika Root belum dibuat, tampilkan form pembuatan Root
 if st.session_state.root is None:
-    st.info("Sistem belum memiliki kategori utama. silakan buat terlebih dahulu.")
-    name_root = st.text_input("Masukan nama kategori utama (Root) :", value ="Toko Saya")
+    st.info("Sistem belum memiliki kategori utama. Silahkan buat terlebih dahulu.")
+    nama_root = st.text_input("Masukkan nama kategori utama (Root):", value="Toko Saya")
 
-    if st.button("Buat kategori utama", type="primary"):
-        st.session_state.root = KategoriNode(name_root)
-        st.rerun() #refresh halaman
-
-#jika root sudah ada, tampilkan menu utama menggunakan tabs
+    if st.button("Buat Kategori Utama", type="primary"):
+        st.session_state.root = KategoriNode(nama_root)
+        st.rerun() #refresh halaman 
+    
+# Jika Root sudah ada, tampilkan Menu Utama menggunakan Tabs 
 else:
     root = st.session_state.root
 
-    #mengganti menu cli dengan sistem tab yang lebih moderen
-    tab1,tab2,tab3 = st.tabs( [" Lihat struktur", "+ Tambah sub kategori", "Cari Jalur"])
+    # Mengganti menu CLI dengan sistem Tab yang lebih modern
+    tab1, tab2, tab3 = st.tabs(["Lihat Struktur", "+ Tambah Sub-Kategori",'Cari Jalur'])
 
-    #TAB 1 ; Lihat struktur
+    # TAB 1: Lihat Struktur 
     with tab1:
-        st.subheader("Struktur kategori saat ini")
+        st.subheader("Struktur Kategori Saat Ini")
         tree_teks = root.dapatkan_tree_string()
-        #Menggunakan st.code agar format identitas (spasi) tetap rapi
+        #menggunakan st.code agar format indentasi (spasi) tetap rapi 
         st.code(tree_teks, language="text")
 
-        #tab 2 tambah sub kategori
-        with tab2:
-            st.subheader("Tambah Cabang Baru")
-            induk_nama = st.text_input("Nama kategori induk tempat cabang ditambahkan: ")
-            anak_nama = st.text_input("Nama sub-kategori baru:")
+    # TAB 2: tambah Sub-Kategori 
+    with tab2:
+        st.subheader("Tambah Cabang Baru")
+        induk_nama = st.text_input("Nama kategori induk tempat cabang ditambahkan:")
+        anak_nama = st.text_input("Nama sub-kategori baru:")
 
-            if st.button("Tambah Kategori") :
+        if st.button("Tambah Kategori"):
+            if induk_nama and anak_nama:
+                induk_node = root.cari_node(induk_nama)
                 if induk_node:
                     induk_node.tambah_sub(KategoriNode(anak_nama))
-                    st.success(f"Berhasil menambahkan '{anak_nama}' di bawah' {induk_node.nama}'!")
+                    st.success(f"Berhasil menambahkan '{anak_nama}' di bawah '{induk_node.nama}'!")
                 else:
-                    st.eror(f"Kategori '{induk_nama}' tidak sitemukan! Pastikan Ejaan benar.")
-
+                    st.error(f"Kategori '{induk_nama}' tidak ditemukan! Pastikan ejaannya benar.")
             else:
-                st.warning("Harap isi kedua kolom di atas.")
+                st.warning("Harga ini kedua kolom di atas.")
 
-    #tab 3: Cari Jalur 
+    # TAB 3: Cari Jalur 
     with tab3:
         st.subheader("Pencarian Breadcrumb")
-        target_cari = st.text_input("Nama kategori yang ingin dicari jalurnya: ")
+        target_cari = st.text_input("Nama kategori yang ingin dicari jalurnya:")
 
         if st.button("Cari Jalur"):
             if target_cari:
@@ -109,14 +108,12 @@ else:
                     st.success("Ditemukan!")
                     st.info(f" Jalur: {hasil}")
                 else:
-                    st.eror(f"Kategori '{target_cari}' Tidak ditemukan dalam sistem.")
+                    st.error(f"Kategori '{target_cari}' tidak ditemukan dalam sistem.")
             else:
                 st.warning("Harap isi nama kategori yang dicari.")
 
-#TOMBOL RISET
-st.divider()
-if st.button("Rise Sistem / Mulai dari awal"):
-    st.session_state.root = None
-    st.rerun()
-    
- 
+    # Tombol Reset 
+    st.divider()
+    if st.button("Reset Sistem / Mulai dari Awal "):
+        st.session_state.root = None
+        st.rerun()
