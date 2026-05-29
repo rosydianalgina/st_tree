@@ -87,7 +87,7 @@ class GGBitesGraph:
             ],
             "Ayam Geprek": [
                 ("Ayam Geprek Mozarella", 35000, 5),
-                ("Ayam Geprek Keju", 30000. 4),
+                ("Ayam Geprek Keju", 30000, 4),
                 ("Ayam Geprek Sambal Matah", 28000, 5),
                 ("Ayam Geprek Jumbo", 40000, 5)
             ],
