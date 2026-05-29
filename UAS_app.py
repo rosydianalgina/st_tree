@@ -68,208 +68,208 @@ class GGBitesGraph:
             "🍔 Makanan Berat": {
 
                 "Bakso": [
-                ("Bakso Urat", 18000),
-                ("Bakso Jumbo", 25000),
-                ("Bakso Mercon", 22000),
-                ("Bakso Halus", 17000)
+                ("Bakso Urat", 18000, 4),
+                ("Bakso Jumbo", 25000, 5),
+                ("Bakso Mercon", 22000, 4),
+                ("Bakso Halus", 17000, 4)
             ],
             "Mie Ayam": [
-                ("Mie Ayam Bakso", 20000),
-                ("Mie Ayam Ceker", 23000),
-                ("Mie Ayam Pangsit", 18000),
-                ("Mie Ayam Jumbo", 27000)
+                ("Mie Ayam Bakso", 20000, 4),
+                ("Mie Ayam Ceker", 23000, 5),
+                ("Mie Ayam Pangsit", 18000, 4),
+                ("Mie Ayam Jumbo", 27000, 4)
             ],
             "Nasi Goreng": [
-                ("Nasi Goreng Seafood", 35000),
-                ("Nasi Goreng Kampung", 18000),
-                ("Nasi Goreng Mawut", 25000),
-                ("Nasi Goreng Spesial", 30000)
+                ("Nasi Goreng Seafood", 35000, 5),
+                ("Nasi Goreng Kampung", 18000, 4),
+                ("Nasi Goreng Mawut", 25000, 4),
+                ("Nasi Goreng Spesial", 30000, 5)
             ],
             "Ayam Geprek": [
-                ("Ayam Geprek Mozarella", 35000),
-                ("Ayam Geprek Keju", 30000),
-                ("Ayam Geprek Sambal Matah", 28000),
-                ("Ayam Geprek Jumbo", 40000)
+                ("Ayam Geprek Mozarella", 35000, 5),
+                ("Ayam Geprek Keju", 30000. 4),
+                ("Ayam Geprek Sambal Matah", 28000, 5),
+                ("Ayam Geprek Jumbo", 40000, 5)
             ],
             "Burger": [
-                ("Cheese Burger", 25000),
-                ("Double Beef Burger", 45000),
-                ("Chicken Burger", 22000),
-                ("BBQ Burger", 35000)
+                ("Cheese Burger", 25000, 4),
+                ("Double Beef Burger", 45000, 5),
+                ("Chicken Burger", 22000, 5),
+                ("BBQ Burger", 35000, 4)
             ],
             "Pizza": [
-                ("Pizza Pepperoni", 70000),
-                ("Pizza Mozarella", 80000),
-                ("Pizza Supreme", 95000),
-                ("Pizza Beef", 85000)
+                ("Pizza Pepperoni", 70000, 4),
+                ("Pizza Mozarella", 80000, 5),
+                ("Pizza Supreme", 95000, 5),
+                ("Pizza Beef", 85000, 5)
             ],
             "Steak": [
-                ("Chicken Steak", 50000),
-                ("Sirloin Steak", 85000),
-                ("Tenderloin Steak", 120000),
-                ("Wagyu Steak", 180000)
+                ("Chicken Steak", 50000, 5),
+                ("Sirloin Steak", 85000, 4),
+                ("Tenderloin Steak", 120000, 5),
+                ("Wagyu Steak", 180000, 5)
             ],
             "Sate Ayam": [
-                ("Sate Ayam Madura", 25000),
-                ("Sate Ayam Taichan", 30000),
-                ("Sate Ayam Jumbo", 35000),
-                ("Sate Ayam Pedas", 28000)
+                ("Sate Ayam Madura", 25000, 4),
+                ("Sate Ayam Taichan", 30000, 5),
+                ("Sate Ayam Jumbo", 35000, 5),
+                ("Sate Ayam Pedas", 28000, 4)
             ],
             "Soto": [
-                ("Soto Ayam", 20000),
-                ("Soto Lamongan", 25000),
-                ("Soto Betawi", 35000),
-                ("Soto Daging", 40000)
+                ("Soto Ayam", 20000, 5),
+                ("Soto Lamongan", 25000, 4),
+                ("Soto Betawi", 35000, 4),
+                ("Soto Daging", 40000, 4)
             ]
             },
 
             "🍟 Makanan Ringan": {
 
                 "Kentang Goreng": [
-                ("French Fries BBQ", 18000),
-                ("French Fries Cheese", 25000),
-                ("French Fries Spicy", 20000),
-                ("Loaded Fries", 35000)
+                ("French Fries BBQ", 18000, 4),
+                ("French Fries Cheese", 25000, 4),
+                ("French Fries Spicy", 20000, 5),
+                ("Loaded Fries", 35000, 5)
             ],
             "Cilok": [
-                ("Cilok Kuah", 12000),
-                ("Cilok Pedas", 15000),
-                ("Cilok Mozarella", 22000),
-                ("Cilok Isi Ayam", 18000)
+                ("Cilok Kuah", 12000, 4),
+                ("Cilok Pedas", 15000, 5),
+                ("Cilok Mozarella", 22000, 4),
+                ("Cilok Isi Ayam", 18000, 5)
             ],
             "Batagor": [
-                ("Batagor Kuah", 20000),
-                ("Batagor Kering", 18000),
-                ("Batagor Mozarella", 30000),
-                ("Batagor Spesial", 35000)
+                ("Batagor Kuah", 20000, 4),
+                ("Batagor Kering", 18000, 5),
+                ("Batagor Mozarella", 30000, 4),
+                ("Batagor Spesial", 35000, 5)
             ],
             "Sosis Bakar": [
-                ("Sosis Bakar Jumbo", 20000),
-                ("Sosis Bakar BBQ", 18000),
-                ("Sosis Bakar Keju", 25000),
-                ("Sosis Bakar Pedas", 22000)
+                ("Sosis Bakar Jumbo", 20000, 5),
+                ("Sosis Bakar BBQ", 18000, 5),
+                ("Sosis Bakar Keju", 25000, 4),
+                ("Sosis Bakar Pedas", 22000, 4)
             ],
             "Roti Bakar": [
-                ("Roti Bakar Coklat", 18000),
-                ("Roti Bakar Keju", 20000),
-                ("Roti Bakar Oreo", 25000),
-                ("Roti Bakar Tiramisu", 28000)
+                ("Roti Bakar Coklat", 18000, 5),
+                ("Roti Bakar Keju", 20000, 4),
+                ("Roti Bakar Oreo", 25000, 4),
+                ("Roti Bakar Tiramisu", 28000, 5)
             ],
             "Siomay": [
-                ("Siomay Bandung", 22000),
-                ("Siomay Jumbo", 28000),
-                ("Siomay Pedas", 25000),
-                ("Siomay Seafood", 35000)
+                ("Siomay Bandung", 22000, 5),
+                ("Siomay Jumbo", 28000, 4),
+                ("Siomay Pedas", 25000, 4),
+                ("Siomay Seafood", 35000, 5)
             ],
             "Dimsum": [
-                ("Dimsum Original", 18000),
-                ("Dimsum Chili Oil", 22000),
-                ("Dimsum Mentai", 30000),
-                ("Dimsum Mozarella", 28000)
+                ("Dimsum Original", 18000, 4),
+                ("Dimsum Chili Oil", 22000, 4),
+                ("Dimsum Mentai", 30000, 5),
+                ("Dimsum Mozarella", 28000, 4)
             ],
             "Corndog": [
-                ("Corndog Mozarella", 25000),
-                ("Corndog Sosis", 22000),
-                ("Corndog Coklat", 28000),
-                ("Corndog Spicy Mayo", 30000)
+                ("Corndog Mozarella", 25000, 5),
+                ("Corndog Sosis", 22000, 4),
+                ("Corndog Coklat", 28000, 5),
+                ("Corndog Spicy Mayo", 30000, 4)
             ]
             },
 
             "🍰 Dessert": {
 
                 "Donat": [
-                ("Donat Coklat", 12000),
-                ("Donat Strawberry", 15000),
-                ("Donat Oreo", 18000),
-                ("Donat Tiramisu", 22000)
+                ("Donat Coklat", 12000, 5),
+                ("Donat Strawberry", 15000, 5),
+                ("Donat Oreo", 18000, 4),
+                ("Donat Tiramisu", 22000, 5)
             ],
             "Brownies": [
-                ("Brownies Kukus", 25000),
-                ("Brownies Lumer", 30000),
-                ("Brownies Almond", 35000),
-                ("Brownies Keju", 32000)
+                ("Brownies Kukus", 25000, 4),
+                ("Brownies Lumer", 30000, 5),
+                ("Brownies Almond", 35000, 5),
+                ("Brownies Keju", 32000, 5)
             ],
             "Es Krim": [
-                ("Es Krim Vanilla", 15000),
-                ("Es Krim Coklat", 18000),
-                ("Es Krim Strawberry", 20000),
-                ("Es Krim Matcha", 28000)
+                ("Es Krim Vanilla", 15000, 5),
+                ("Es Krim Coklat", 18000, 5),
+                ("Es Krim Strawberry", 20000, 5),
+                ("Es Krim Matcha", 28000, 5)
             ],
             "Cheesecake": [
-                ("Cheesecake Oreo", 40000),
-                ("Cheesecake Matcha", 50000),
-                ("Cheesecake Strawberry", 45000),
-                ("Cheesecake Blueberry", 55000)
+                ("Cheesecake Oreo", 40000, 4),
+                ("Cheesecake Matcha", 50000, 4),
+                ("Cheesecake Strawberry", 45000, 5),
+                ("Cheesecake Blueberry", 55000, 5)
             ],
             "Waffle": [
-                ("Waffle Coklat", 25000),
-                ("Waffle Strawberry", 28000),
-                ("Waffle Ice Cream", 35000),
-                ("Waffle Matcha", 40000)
+                ("Waffle Coklat", 25000, 5),
+                ("Waffle Strawberry", 28000, 4),
+                ("Waffle Ice Cream", 35000, 5),
+                ("Waffle Matcha", 40000, 4)
             ],
             "Pancake": [
-                ("Pancake Maple", 25000),
-                ("Pancake Coklat", 28000),
-                ("Pancake Strawberry", 30000),
-                ("Pancake Ice Cream", 38000)
+                ("Pancake Maple", 25000, 5),
+                ("Pancake Coklat", 28000, 5),
+                ("Pancake Strawberry", 30000, 4),
+                ("Pancake Ice Cream", 38000, 5)
             ],
             "Coklat Dubai": [
-                ("Coklat Dubai Mini", 50000),
-                ("Coklat Dubai", 250000),
-                ("Dubai Chewy Cookie Mini", 25000),
-                ("Dubai Chewy Cookie Jumbo", 150000)
+                ("Coklat Dubai Mini", 50000, 4),
+                ("Coklat Dubai", 250000, 5),
+                ("Dubai Chewy Cookie Mini", 25000, 5),
+                ("Dubai Chewy Cookie Jumbo", 150000, 5)
             ]
             },
 
             "🥤 Minuman": {
 
                 "Thai Tea": [
-                ("Thai Tea Original", 15000),
-                ("Thai Tea Cheese", 25000),
-                ("Thai Tea Brown Sugar", 30000),
-                ("Thai Tea Jumbo", 22000)
+                ("Thai Tea Original", 15000, 4),
+                ("Thai Tea Cheese", 25000, 5),
+                ("Thai Tea Brown Sugar", 30000, 4),
+                ("Thai Tea Jumbo", 22000, 5)
             ],
             "Boba Brown Sugar": [
-                ("Brown Sugar Fresh Milk", 30000),
-                ("Brown Sugar Regal", 35000),
-                ("Brown Sugar Oreo", 40000),
-                ("Brown Sugar Cheese", 45000)
+                ("Brown Sugar Fresh Milk", 30000, 5),
+                ("Brown Sugar Regal", 35000, 4),
+                ("Brown Sugar Oreo", 40000, 4),
+                ("Brown Sugar Cheese", 45000, 4)
             ],
             "Kopi Latte": [
-                ("Vanilla Latte", 30000),
-                ("Hazelnut Latte", 35000),
-                ("Caramel Latte", 38000),
-                ("Mocha Latte", 42000)
+                ("Vanilla Latte", 30000, 5),
+                ("Hazelnut Latte", 35000, 4),
+                ("Caramel Latte", 38000, 5),
+                ("Mocha Latte", 42000, 4)
             ],
             "Milkshake": [
-                ("Chocolate Milkshake", 25000),
-                ("Vanilla Milkshake", 28000),
-                ("Strawberry Milkshake", 30000),
-                ("Oreo Milkshake", 35000)
+                ("Chocolate Milkshake", 25000, 4),
+                ("Vanilla Milkshake", 28000, 5),
+                ("Strawberry Milkshake", 30000, 5),
+                ("Oreo Milkshake", 35000, 4)
             ],
             "Es Jeruk": [
-                ("Es Jeruk Peras", 12000),
-                ("Orange Float", 25000),
-                ("Es Jeruk Jumbo", 18000),
-                ("Es Jeruk Nipis", 15000)
+                ("Es Jeruk Peras", 12000, 4),
+                ("Orange Float", 25000, 5),
+                ("Es Jeruk Jumbo", 18000, 5),
+                ("Es Jeruk Nipis", 15000, 4)
             ],
             "Lemon Tea": [
-                ("Lemon Tea Original", 15000),
-                ("Honey Lemon Tea", 25000),
-                ("Lychee Lemon Tea", 30000),
-                ("Yakult Lemon Tea", 35000)
+                ("Lemon Tea Original", 15000, 5),
+                ("Honey Lemon Tea", 25000, 5),
+                ("Lychee Lemon Tea", 30000, 4),
+                ("Yakult Lemon Tea", 35000, 4)
             ],
             "Matcha Latte": [
-                ("Matcha Latte Original", 35000),
-                ("Creamy Matcha Latte", 45000),
-                ("Premium Matcha Latte", 65000),
-                ("Matcha Brown Sugar", 50000)
+                ("Matcha Latte Original", 35000, 4),
+                ("Creamy Matcha Latte", 45000, 4),
+                ("Premium Matcha Latte", 65000, 5),
+                ("Matcha Brown Sugar", 50000, 4)
             ],
             "Yakult": [
-                ("Yakult Strawberry", 25000),
-                ("Yakult Mango", 28000),
-                ("Yakult Lychee", 30000),
-                ("Yakult Mix Berry", 35000)
+                ("Yakult Strawberry", 25000, 4),
+                ("Yakult Mango", 28000, 5),
+                ("Yakult Lychee", 30000, 5),
+                ("Yakult Mix Berry", 35000, 4)
             ]
             }
         }
