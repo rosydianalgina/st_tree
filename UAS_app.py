@@ -557,7 +557,7 @@ else:
         <div class="food-name">{pick[0]}</div>
         <div class="food-price">Rp{pick[1]:,}</div>
         </div>
-        <div>  ⭐ {pick[2]<\div>
+        <div>  ⭐ {pick[2]}<\div>
         <\div>
         """, unsafe_allow_html=True)
 
