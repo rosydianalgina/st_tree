@@ -104,8 +104,8 @@ class GGBitesGraph:
                 "Yakult"
             ]
         }
-
-       self.graph_combo = {
+        
+        self.graph_combo = {
             "Bakso": [
                 ("Es Jeruk", 5),
                 ("Kentang Goreng", 4)
@@ -131,6 +131,7 @@ class GGBitesGraph:
                 ("Kopi Latte", 5)
             ]
         }
+
 app = GGBitesGraph()
 
 # =========================================================
