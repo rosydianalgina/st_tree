@@ -1,37 +1,25 @@
 import streamlit as st
 import random
-from datetime import datetime
 
 # =========================================================
-# PAGE CONFIG
+# CONFIG STREAMLIT
 # =========================================================
 st.set_page_config(
     page_title="GG BITES",
-    page_icon="🍔",
+    page_icon="🍽️",
     layout="wide"
 )
 
 # =========================================================
-# SESSION STATE
-# =========================================================
-if "cart" not in st.session_state:
-    st.session_state.cart = []
-
-if "orders" not in st.session_state:
-    st.session_state.orders = []
-
-# =========================================================
-# CLASS GRAPH
+# CLASS GG BITES
 # =========================================================
 class GGBitesGraph:
-
     def __init__(self):
 
         # =================================================
-        # EMOJI
+        # EMOJI MENU
         # =================================================
         self.emoji = {
-
             "Bakso": "🍜",
             "Mie Ayam": "🍜",
             "Nasi Goreng": "🍚",
@@ -39,170 +27,296 @@ class GGBitesGraph:
             "Burger": "🍔",
             "Pizza": "🍕",
             "Steak": "🥩",
+            "Sate Ayam": "🍢",
+            "Soto": "🥣",
 
             "Kentang Goreng": "🍟",
             "Cilok": "🍡",
             "Batagor": "🥟",
+            "Sosis Bakar": "🌭",
+            "Roti Bakar": "🍞",
+            "Siomay": "🥠",
+            "Dimsum": "🥢",
+            "Corndog": "🧀",
 
             "Donat": "🍩",
             "Brownies": "🧁",
             "Es Krim": "🍦",
+            "Cheesecake": "🧀",
+            "Waffle": "🧇",
+            "Pancake": "🥞",
+            "Coklat Dubai": "🍫",
 
             "Thai Tea": "🥤",
             "Boba Brown Sugar": "🧋",
-            "Matcha Latte": "🍵"
+            "Kopi Latte": "☕",
+            "Milkshake": "🥛",
+            "Es Jeruk": "🍊",
+            "Lemon Tea": "🍋",
+            "Matcha Latte": "🍵",
+            "Yakult": "🍹"
         }
 
         # =================================================
-        # KATEGORI
+        # KATEGORI MENU
         # =================================================
         self.kategori = {
-
-            "🍽️ Makanan Berat": {
-
-                "Bakso": [
-                    ("Bakso Urat", 18000),
-                    ("Bakso Jumbo", 25000),
-                    ("Bakso Mercon", 22000),
-                    ("Bakso Halus", 17000)
-                ],
-
-                "Mie Ayam": [
-                    ("Mie Ayam Bakso", 20000),
-                    ("Mie Ayam Ceker", 23000),
-                    ("Mie Ayam Pangsit", 18000),
-                    ("Mie Ayam Jumbo", 27000)
-                ],
-
-                "Nasi Goreng": [
-                    ("Nasi Goreng Seafood", 35000),
-                    ("Nasi Goreng Kampung", 18000),
-                    ("Nasi Goreng Mawut", 25000),
-                    ("Nasi Goreng Spesial", 30000)
-                ],
-
-                "Ayam Geprek": [
-                    ("Ayam Geprek Mozarella", 35000),
-                    ("Ayam Geprek Keju", 30000),
-                    ("Ayam Geprek Sambal Matah", 28000),
-                    ("Ayam Geprek Jumbo", 40000)
-                ],
-
-                "Burger": [
-                    ("Cheese Burger", 25000),
-                    ("Double Beef Burger", 45000),
-                    ("Chicken Burger", 22000),
-                    ("BBQ Burger", 35000)
-                ],
-
-                "Pizza": [
-                    ("Pizza Pepperoni", 70000),
-                    ("Pizza Mozarella", 80000),
-                    ("Pizza Supreme", 95000),
-                    ("Pizza Beef", 85000)
-                ],
-
-                "Steak": [
-                    ("Chicken Steak", 50000),
-                    ("Sirloin Steak", 85000),
-                    ("Tenderloin Steak", 120000),
-                    ("Wagyu Steak", 180000)
-                ]
-            },
-
-            "🍟 Makanan Ringan": {
-
-                "Kentang Goreng": [
-                    ("French Fries BBQ", 18000),
-                    ("French Fries Cheese", 25000),
-                    ("French Fries Spicy", 20000),
-                    ("Loaded Fries", 35000)
-                ],
-
-                "Cilok": [
-                    ("Cilok Kuah", 12000),
-                    ("Cilok Pedas", 15000),
-                    ("Cilok Mozarella", 22000),
-                    ("Cilok Isi Ayam", 18000)
-                ],
-
-                "Batagor": [
-                    ("Batagor Kuah", 20000),
-                    ("Batagor Kering", 18000),
-                    ("Batagor Mozarella", 30000),
-                    ("Batagor Spesial", 35000)
-                ]
-            },
-
-            "🍰 Dessert": {
-
-                "Donat": [
-                    ("Donat Coklat", 12000),
-                    ("Donat Strawberry", 15000),
-                    ("Donat Oreo", 18000),
-                    ("Donat Tiramisu", 22000)
-                ],
-
-                "Brownies": [
-                    ("Brownies Kukus", 25000),
-                    ("Brownies Lumer", 30000),
-                    ("Brownies Almond", 35000),
-                    ("Brownies Keju", 32000)
-                ],
-
-                "Es Krim": [
-                    ("Es Krim Vanilla", 15000),
-                    ("Es Krim Coklat", 18000),
-                    ("Es Krim Strawberry", 20000),
-                    ("Es Krim Matcha", 28000)
-                ]
-            },
-
-            "🥤 Minuman": {
-
-                "Thai Tea": [
-                    ("Thai Tea Original", 15000),
-                    ("Thai Tea Cheese", 25000),
-                    ("Thai Tea Brown Sugar", 30000),
-                    ("Thai Tea Jumbo", 22000)
-                ],
-
-                "Boba Brown Sugar": [
-                    ("Brown Sugar Fresh Milk", 30000),
-                    ("Brown Sugar Regal", 35000),
-                    ("Brown Sugar Oreo", 40000),
-                    ("Brown Sugar Cheese", 45000)
-                ],
-
-                "Matcha Latte": [
-                    ("Matcha Latte Original", 35000),
-                    ("Creamy Matcha Latte", 45000),
-                    ("Premium Matcha Latte", 65000),
-                    ("Matcha Brown Sugar", 50000)
-                ]
-            }
-        }
-
-        # =================================================
-        # COMBO
-        # =================================================
-        self.graph_combo = {
-
-            "Burger": [
-                ("Milkshake", 5),
-                ("Kentang Goreng", 5)
+            "Makanan Berat": [
+                "Bakso",
+                "Mie Ayam",
+                "Nasi Goreng",
+                "Ayam Geprek",
+                "Burger",
+                "Pizza",
+                "Steak",
+                "Sate Ayam",
+                "Soto"
+                "Sushi"
             ],
 
-            "Pizza": [
-                ("Lemon Tea", 4),
-                ("Kentang Goreng", 5)
+            "Makanan Ringan": [
+                "Kentang Goreng",
+                "Cilok",
+                "Batagor",
+                "Sosis Bakar",
+                "Roti Bakar",
+                "Siomay",
+                "Dimsum",
+                "Corndog"
             ],
 
-            "Bakso": [
-                ("Es Jeruk", 5),
-                ("Kentang Goreng", 4)
+            "Dessert": [
+                "Donat",
+                "Brownies",
+                "Es Krim",
+                "Cheesecake",
+                "Waffle",
+                "Pancake",
+                "Coklat Dubai"
+            ],
+
+            "Minuman": [
+                "Thai Tea",
+                "Boba Brown Sugar",
+                "Kopi Latte",
+                "Milkshake",
+                "Es Jeruk",
+                "Lemon Tea",
+                "Matcha Latte",
+                "Yakult"
             ]
         }
+
+        # =================================================
+        # GRAPH REKOMENDASI
+        # =================================================
+        self.graph_rekomendasi = {
+            "Bakso": [
+                ("Bakso Urat", 18000),
+                ("Bakso Jumbo", 25000),
+                ("Bakso Mercon", 22000),
+                ("Bakso Halus", 17000)
+            ],
+            "Mie Ayam": [
+                ("Mie Ayam Bakso", 20000),
+                ("Mie Ayam Ceker", 23000),
+                ("Mie Ayam Pangsit", 18000),
+                ("Mie Ayam Jumbo", 27000)
+            ],
+            "Nasi Goreng": [
+                ("Nasi Goreng Seafood", 35000),
+                ("Nasi Goreng Kampung", 18000),
+                ("Nasi Goreng Mawut", 25000),
+                ("Nasi Goreng Spesial", 30000)
+            ],
+            "Ayam Geprek": [
+                ("Ayam Geprek Mozarella", 35000),
+                ("Ayam Geprek Keju", 30000),
+                ("Ayam Geprek Sambal Matah", 28000),
+                ("Ayam Geprek Jumbo", 40000)
+            ],
+            "Burger": [
+                ("Cheese Burger", 25000),
+                ("Double Beef Burger", 45000),
+                ("Chicken Burger", 22000),
+                ("BBQ Burger", 35000)
+            ],
+            "Pizza": [
+                ("Pizza Pepperoni", 70000),
+                ("Pizza Mozarella", 80000),
+                ("Pizza Supreme", 95000),
+                ("Pizza Beef", 85000)
+            ],
+            "Steak": [
+                ("Chicken Steak", 50000),
+                ("Sirloin Steak", 85000),
+                ("Tenderloin Steak", 120000),
+                ("Wagyu Steak", 180000)
+            ],
+            "Sate Ayam": [
+                ("Sate Ayam Madura", 25000),
+                ("Sate Ayam Taichan", 30000),
+                ("Sate Ayam Jumbo", 35000),
+                ("Sate Ayam Pedas", 28000)
+            ],
+            "Soto": [
+                ("Soto Ayam", 20000),
+                ("Soto Lamongan", 25000),
+                ("Soto Betawi", 35000),
+                ("Soto Daging", 40000)
+            ],
+            "Sushi": [
+                ("Salmon Sushi", 20000),
+                ("Inari Sushi", 15000),
+                ("tamago Sushi", 10000),
+                ("Salmon Mentai Sushi", 25000)
+            ],
+            "Kentang Goreng": [
+                ("French Fries BBQ", 18000),
+                ("French Fries Cheese", 25000),
+                ("French Fries Spicy", 20000),
+                ("Loaded Fries", 35000)
+            ],
+            "Cilok": [
+                ("Cilok Kuah", 12000),
+                ("Cilok Pedas", 15000),
+                ("Cilok Mozarella", 22000),
+                ("Cilok Isi Ayam", 18000)
+            ],
+            "Batagor": [
+                ("Batagor Kuah", 20000),
+                ("Batagor Kering", 18000),
+                ("Batagor Mozarella", 30000),
+                ("Batagor Spesial", 35000)
+            ],
+            "Sosis Bakar": [
+                ("Sosis Bakar Jumbo", 20000),
+                ("Sosis Bakar BBQ", 18000),
+                ("Sosis Bakar Keju", 25000),
+                ("Sosis Bakar Pedas", 22000)
+            ],
+            "Roti Bakar": [
+                ("Roti Bakar Coklat", 18000),
+                ("Roti Bakar Keju", 20000),
+                ("Roti Bakar Oreo", 25000),
+                ("Roti Bakar Tiramisu", 28000)
+            ],
+            "Siomay": [
+                ("Siomay Bandung", 22000),
+                ("Siomay Jumbo", 28000),
+                ("Siomay Pedas", 25000),
+                ("Siomay Seafood", 35000)
+            ],
+            "Dimsum": [
+                ("Dimsum Original", 18000),
+                ("Dimsum Chili Oil", 22000),
+                ("Dimsum Mentai", 30000),
+                ("Dimsum Mozarella", 28000)
+            ],
+            "Corndog": [
+                ("Corndog Mozarella", 25000),
+                ("Corndog Sosis", 22000),
+                ("Corndog Coklat", 28000),
+                ("Corndog Spicy Mayo", 30000)
+            ],
+            "Donat": [
+                ("Donat Coklat", 12000),
+                ("Donat Strawberry", 15000),
+                ("Donat Oreo", 18000),
+                ("Donat Tiramisu", 22000)
+            ],
+            "Brownies": [
+                ("Brownies Kukus", 25000),
+                ("Brownies Lumer", 30000),
+                ("Brownies Almond", 35000),
+                ("Brownies Keju", 32000)
+            ],
+            "Es Krim": [
+                ("Es Krim Vanilla", 15000),
+                ("Es Krim Coklat", 18000),
+                ("Es Krim Strawberry", 20000),
+                ("Es Krim Matcha", 28000)
+            ],
+            "Cheesecake": [
+                ("Cheesecake Oreo", 40000),
+                ("Cheesecake Matcha", 50000),
+                ("Cheesecake Strawberry", 45000),
+                ("Cheesecake Blueberry", 55000)
+            ],
+            "Waffle": [
+                ("Waffle Coklat", 25000),
+                ("Waffle Strawberry", 28000),
+                ("Waffle Ice Cream", 35000),
+                ("Waffle Matcha", 40000)
+            ],
+            "Pancake": [
+                ("Pancake Maple", 25000),
+                ("Pancake Coklat", 28000),
+                ("Pancake Strawberry", 30000),
+                ("Pancake Ice Cream", 38000)
+            ],
+            "Coklat Dubai": [
+                ("Coklat Dubai Mini", 50000),
+                ("Coklat Dubai", 250000),
+                ("Dubai Chewy Cookie Mini", 25000),
+                ("Dubai Chewy Cookie Jumbo", 150000)
+            ],
+            "Thai Tea": [
+                ("Thai Tea Original", 15000),
+                ("Thai Tea Cheese", 25000),
+                ("Thai Tea Brown Sugar", 30000),
+                ("Thai Tea Jumbo", 22000)
+            ],
+            "Boba Brown Sugar": [
+                ("Brown Sugar Fresh Milk", 30000),
+                ("Brown Sugar Regal", 35000),
+                ("Brown Sugar Oreo", 40000),
+                ("Brown Sugar Cheese", 45000)
+            ],
+            "Kopi Latte": [
+                ("Vanilla Latte", 30000),
+                ("Hazelnut Latte", 35000),
+                ("Caramel Latte", 38000),
+                ("Mocha Latte", 42000)
+            ],
+            "Milkshake": [
+                ("Chocolate Milkshake", 25000),
+                ("Vanilla Milkshake", 28000),
+                ("Strawberry Milkshake", 30000),
+                ("Oreo Milkshake", 35000)
+            ],
+            "Es Jeruk": [
+                ("Es Jeruk Peras", 12000),
+                ("Orange Float", 25000),
+                ("Es Jeruk Jumbo", 18000),
+                ("Es Jeruk Nipis", 15000)
+            ],
+            "Lemon Tea": [
+                ("Lemon Tea Original", 15000),
+                ("Honey Lemon Tea", 25000),
+                ("Lychee Lemon Tea", 30000),
+                ("Yakult Lemon Tea", 35000)
+            ],
+            "Matcha Latte": [
+                ("Matcha Latte Original", 35000),
+                ("Creamy Matcha Latte", 45000),
+                ("Premium Matcha Latte", 65000),
+                ("Matcha Brown Sugar", 50000)
+            ],
+            "Yakult": [
+                ("Yakult Strawberry", 25000),
+                ("Yakult Mango", 28000),
+                ("Yakult Lychee", 30000),
+                ("Yakult Mix Berry", 35000)
+            ]
+        }
+
+    # =====================================================
+    # FUNGSI BINTANG
+    # =====================================================
+    def bintang(self, rating):
+        return "⭐" * rating
+
 
 # =========================================================
 # OBJECT
@@ -210,650 +324,251 @@ class GGBitesGraph:
 app = GGBitesGraph()
 
 # =========================================================
-# CSS
-# =========================================================
-st.markdown("""
-<style>
-
-.stApp{
-    background:linear-gradient(
-        to bottom right,
-        #f8f5f1,
-        #fffaf7
-    );
-}
-
-/* HEADER */
-
-.main-header{
-    text-align:center;
-    margin-bottom:40px;
-}
-
-.title{
-    font-size:70px;
-    font-weight:900;
-    color:#ff5b93;
-}
-
-.subtitle{
-    font-size:22px;
-    color:#666;
-    margin-top:-10px;
-}
-
-/* CATEGORY */
-
-.category-title{
-    font-size:35px;
-    font-weight:bold;
-    color:#333;
-    margin-top:40px;
-    margin-bottom:20px;
-}
-
-/* SUB MENU */
-
-.sub-menu{
-    font-size:24px;
-    font-weight:bold;
-    color:#555;
-    margin-top:20px;
-    margin-bottom:15px;
-}
-
-/* CARD */
-
-.card{
-
-    background:white;
-
-    border-radius:25px;
-
-    padding:20px;
-
-    height:280px;
-
-    display:flex;
-
-    flex-direction:column;
-
-    justify-content:space-between;
-
-    align-items:center;
-
-    text-align:center;
-
-    box-shadow:0 4px 15px rgba(0,0,0,0.08);
-
-    margin-bottom:20px;
-
-    transition:0.3s;
-}
-
-.card:hover{
-
-    transform:translateY(-5px);
-
-    box-shadow:0 8px 20px rgba(0,0,0,0.12);
-}
-
-/* EMOJI */
-
-.food-emoji{
-    font-size:60px;
-}
-
-/* NAME */
-
-.food-name{
-    font-size:20px;
-    font-weight:bold;
-    color:#333;
-}
-
-/* PRICE */
-
-.food-price{
-    font-size:24px;
-    font-weight:bold;
-    color:#ff5b93;
-}
-
-/* BUTTON */
-
-.stButton > button{
-
-    width:100%;
-
-    border:none;
-
-    border-radius:15px;
-
-    padding:12px;
-
-    background:linear-gradient(
-        90deg,
-        #ff8ab3,
-        #ff5b93
-    );
-
-    color:white;
-
-    font-size:16px;
-
-    font-weight:bold;
-}
-
-.stButton > button:hover{
-
-    background:linear-gradient(
-        90deg,
-        #ff5b93,
-        #ff8ab3
-    );
-}
-
-/* CART */
-
-.cart-box{
-
-    background:white;
-
-    border-radius:25px;
-
-    padding:25px;
-
-    box-shadow:0 4px 15px rgba(0,0,0,0.08);
-
-    position:sticky;
-
-    top:20px;
-}
-
-</style>
-""", unsafe_allow_html=True)
-
-# =========================================================
 # HEADER
 # =========================================================
-st.markdown("""
-<div class='main-header'>
-
-<div class='title'>
-💖 GG BITES 💖
-</div>
-
-<div class='subtitle'>
-McD Style Food Ordering System
-</div>
-
-</div>
-""", unsafe_allow_html=True)
+st.markdown(
+    """
+    <h1 style='text-align:center;color:#ff4b4b;'>
+    🍽️ GG BITES 🍽️
+    </h1>
+    <h4 style='text-align:center;'>
+    Smart Food Recommendation System
+    </h4>
+    """,
+    unsafe_allow_html=True
+)
 
 # =========================================================
-# SIDEBAR
+# SIDEBAR MENU
 # =========================================================
-menu = st.sidebar.radio(
-
-    "📋 MENU",
-
+menu = st.sidebar.selectbox(
+    "📋 Pilih Menu",
     [
-        "🍔 Order Menu",
-        "🔍 Cari Rekomendasi",
-        "⭐ Top Rating",
-        "💡 Combo Recommendation",
-        "🎲 Random Pick",
-        "💰 Rekomendasi Harga",
-        "🔐 Admin"
+        "Lihat Menu",
+        "Cari Rekomendasi",
+        "Favorit Hari Ini",
+        "Top Rating",
+        "Combo Recommendation",
+        "Random Pick",
+        "Search Menu",
+        "Rekomendasi Berdasarkan Harga"
     ]
 )
 
 # =========================================================
-# ORDER MENU
+# MENU 1 - LIHAT MENU
 # =========================================================
-if menu == "🍔 Order Menu":
+if menu == "Lihat Menu":
 
-    kiri, kanan = st.columns([3,1])
+    st.subheader("📖 Daftar Menu")
 
-    # =====================================================
-    # MENU
-    # =====================================================
-    with kiri:
+    for kategori, daftar_menu in app.kategori.items():
 
-        for kategori, isi in app.kategori.items():
+        st.markdown(f"## 🍽️ {kategori}")
 
-            st.markdown(f"""
-            <div class='category-title'>
-            {kategori}
-            </div>
-            """, unsafe_allow_html=True)
+        cols = st.columns(3)
 
-            for jenis_menu, daftar_menu in isi.items():
+        for i, item in enumerate(daftar_menu):
 
-                st.markdown(f"""
-                <div class='sub-menu'>
-                {app.emoji.get(jenis_menu,'🍽️')} {jenis_menu}
-                </div>
-                """, unsafe_allow_html=True)
+            emoji = app.emoji.get(item, "🍽️")
 
-                cols = st.columns(4)
-
-                for i, (nama, harga) in enumerate(daftar_menu):
-
-                    with cols[i % 4]:
-
-                        st.markdown(f"""
-                        <div class='card'>
-
-                            <div class='food-emoji'>
-                            {app.emoji.get(jenis_menu,'🍽️')}
-                            </div>
-
-                            <div class='food-name'>
-                            {nama}
-                            </div>
-
-                            <div class='food-price'>
-                            Rp{harga:,}
-                            </div>
-
-                        </div>
-                        """, unsafe_allow_html=True)
-
-                        if st.button(
-                            "🛒 Tambah",
-                            key=nama
-                        ):
-
-                            st.session_state.cart.append(
-                                (nama, harga)
-                            )
-
-                            st.success(
-                                f"{nama} ditambahkan!"
-                            )
-
-    # =====================================================
-    # CART
-    # =====================================================
-    with kanan:
-
-        st.markdown("""
-        <div class='cart-box'>
-        <h2>🛒 Pesanan</h2>
-        """, unsafe_allow_html=True)
-
-        total = 0
-
-        if len(st.session_state.cart) == 0:
-
-            st.info("Belum ada pesanan")
-
-        else:
-
-            for item, harga in st.session_state.cart:
-
-                st.write(f"🍽️ {item}")
-                st.write(f"💰 Rp{harga:,}")
-
-                total += harga
-
-                st.divider()
-
-            st.subheader(
-                f"💰 Total : Rp{total:,}"
-            )
-
-            nama = st.text_input(
-                "Nama Pemesan"
-            )
-
-            pembayaran = st.selectbox(
-
-                "Metode Pembayaran",
-
-                [
-                    "QRIS",
-                    "Cash",
-                    "DANA",
-                    "OVO",
-                    "GoPay"
-                ]
-            )
-
-            # QRIS
-            if pembayaran == "QRIS":
-
-                st.image(
-                    "https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=GGBITESPAYMENT"
-                )
-
-                st.success(
-                    "Silahkan scan QRIS"
-                )
-
-            if st.button("✅ Checkout"):
-
-                data = {
-
-                    "nama": nama,
-                    "pesanan": st.session_state.cart,
-                    "total": total,
-                    "pembayaran": pembayaran,
-                    "waktu": datetime.now().strftime("%d/%m/%Y %H:%M")
-                }
-
-                st.session_state.orders.append(data)
-
-                st.success(
-                    "Pesanan berhasil dibuat!"
-                )
-
-                st.balloons()
-
-                st.session_state.cart = []
-
-        st.markdown("</div>", unsafe_allow_html=True)
+            cols[i % 3].success(f"{emoji} {item}")
 
 # =========================================================
-# SEARCH MENU
+# MENU 2 - CARI REKOMENDASI
 # =========================================================
-elif menu == "🔍 Cari Rekomendasi":
+elif menu == "Cari Rekomendasi":
 
     st.subheader("🔍 Cari Rekomendasi")
 
-    cari = st.text_input(
-        "Cari menu..."
+    kategori = st.selectbox(
+        "Pilih Kategori",
+        list(app.kategori.keys())
     )
 
-    if cari:
+    menu_pilih = st.selectbox(
+        "Pilih Menu",
+        app.kategori[kategori]
+    )
 
-        ditemukan = False
+    if st.button("Tampilkan Rekomendasi"):
 
-        for kategori, isi in app.kategori.items():
+        hasil = app.graph_rekomendasi.get(menu_pilih, [])
 
-            for jenis, daftar in isi.items():
+        st.markdown(f"## ✨ Rekomendasi {menu_pilih}")
 
-                if cari.lower() in jenis.lower():
+        for nama, harga in hasil:
 
-                    ditemukan = True
+            st.info(f"""
+🍽️ {nama}
 
-                    st.markdown(f"## {jenis}")
-
-                    cols = st.columns(4)
-
-                    for i, (nama, harga) in enumerate(daftar):
-
-                        with cols[i % 4]:
-
-                            st.markdown(f"""
-                            <div class='card'>
-
-                            <div class='food-emoji'>
-                            🔍
-                            </div>
-
-                            <div class='food-name'>
-                            {nama}
-                            </div>
-
-                            <div class='food-price'>
-                            Rp{harga:,}
-                            </div>
-
-                            </div>
-                            """, unsafe_allow_html=True)
-
-        if not ditemukan:
-
-            st.error("❌ Menu tidak ditemukan")
+💰 Harga : Rp{harga:,}
+""")
 
 # =========================================================
-# TOP RATING
+# MENU 3 - FAVORIT HARI INI
 # =========================================================
-elif menu == "⭐ Top Rating":
+elif menu == "Favorit Hari Ini":
 
-    top = [
+    st.subheader("🔥 Favorit Hari Ini")
 
-        ("Wagyu Steak", "⭐⭐⭐⭐⭐"),
-        ("Pizza Supreme", "⭐⭐⭐⭐⭐"),
-        ("Double Beef Burger", "⭐⭐⭐⭐⭐"),
-        ("Premium Matcha Latte", "⭐⭐⭐⭐⭐")
+    semua_menu = []
+
+    for daftar in app.graph_rekomendasi.values():
+        semua_menu.extend(daftar)
+
+    pilihan = random.sample(semua_menu, min(5, len(semua_menu)))
+
+    for nama, harga in pilihan:
+
+        st.success(f"""
+🍽️ {nama}
+
+💰 Harga : Rp{harga:,}
+""")
+
+# =========================================================
+# MENU 4 - TOP RATING
+# =========================================================
+elif menu == "Top Rating":
+
+    st.subheader("🏆 Top Rating")
+
+    top_menu = [
+        ("Wagyu Steak", 5),
+        ("Pizza Supreme", 5),
+        ("Double Beef Burger", 5),
+        ("Premium Matcha Latte", 5),
+        ("Cheesecake Blueberry", 5),
+        ("Salmon Mentai Sushi",5),
+        ("Dubai Chewy Cookie Jumbo",5)
     ]
 
-    cols = st.columns(4)
+    for nama, rating in top_menu:
 
-    for i, (nama, rating) in enumerate(top):
+        st.warning(f"""
+🍽️ {nama}
 
-        with cols[i]:
-
-            st.markdown(f"""
-            <div class='card'>
-
-            <div class='food-emoji'>
-            🏆
-            </div>
-
-            <div class='food-name'>
-            {nama}
-            </div>
-
-            <div class='food-price'>
-            {rating}
-            </div>
-
-            </div>
-            """, unsafe_allow_html=True)
+⭐ Rating : {app.bintang(rating)}
+""")
 
 # =========================================================
-# COMBO RECOMMENDATION
+# MENU 5 - COMBO
 # =========================================================
-elif menu == "💡 Combo Recommendation":
+elif menu == "Combo Recommendation":
 
     st.subheader("💡 Combo Recommendation")
 
-    cari_combo = st.text_input(
-        "Cari combo..."
+    menu_combo = st.selectbox(
+        "Pilih Menu",
+        list(app.graph_combo.keys())
     )
 
-    if cari_combo:
+    if st.button("Tampilkan Combo"):
+
+        hasil = app.graph_combo[menu_combo]
+
+        st.markdown(f"## 🍽️ {menu_combo} cocok dengan")
+
+        for nama, skor in hasil:
+
+            emoji = app.emoji.get(nama, "🍽️")
+
+            st.info(f"""
+{emoji} {nama}
+
+⭐ Kecocokan : {app.bintang(skor)}
+""")
+
+# =========================================================
+# MENU 6 - RANDOM PICK
+# =========================================================
+elif menu == "Random Pick":
+
+    st.subheader("🎲 Random Pick")
+
+    semua_menu = []
+
+    for daftar in app.graph_rekomendasi.values():
+        semua_menu.extend(daftar)
+
+    pilihan = random.choice(semua_menu)
+
+    st.success(f"""
+🍽️ {pilihan[0]}
+
+💰 Harga : Rp{pilihan[1]:,}
+""")
+
+# =========================================================
+# MENU 7 - SEARCH MENU
+# =========================================================
+elif menu == "Search Menu":
+
+    st.subheader("🔎 Search Menu")
+
+    keyword = st.text_input("Cari menu")
+
+    if keyword:
 
         ditemukan = False
 
-        for makanan, combo in app.graph_combo.items():
+        for daftar in app.graph_rekomendasi.values():
 
-            if cari_combo.lower() in makanan.lower():
+            for nama, harga in daftar:
 
-                ditemukan = True
+                if keyword.lower() in nama.lower():
 
-                st.markdown(f"## 🍽️ {makanan}")
+                    ditemukan = True
 
-                cols = st.columns(2)
+                    st.info(f"""
+🍽️ {nama}
 
-                for i, (item, rating) in enumerate(combo):
-
-                    with cols[i % 2]:
-
-                        st.markdown(f"""
-                        <div class='card'>
-
-                        <div class='food-emoji'>
-                        ✨
-                        </div>
-
-                        <div class='food-name'>
-                        {item}
-                        </div>
-
-                        <div class='food-price'>
-                        {'⭐' * rating}
-                        </div>
-
-                        </div>
-                        """, unsafe_allow_html=True)
+💰 Harga : Rp{harga:,}
+""")
 
         if not ditemukan:
-
-            st.error("❌ Combo tidak ditemukan")
-
-# =========================================================
-# RANDOM PICK
-# =========================================================
-elif menu == "🎲 Random Pick":
-
-    semua = []
-
-    for kategori, isi in app.kategori.items():
-
-        for jenis, daftar in isi.items():
-
-            semua.extend(daftar)
-
-    pick = random.choice(semua)
-
-    st.markdown(f"""
-    <div class='card'>
-
-    <div class='food-emoji'>
-    🎲
-    </div>
-
-    <div class='food-name'>
-    {pick[0]}
-    </div>
-
-    <div class='food-price'>
-    Rp{pick[1]:,}
-    </div>
-
-    </div>
-    """, unsafe_allow_html=True)
+            st.error("❌ Menu tidak ditemukan!")
 
 # =========================================================
-# REKOMENDASI HARGA
+# MENU 8 - REKOMENDASI BERDASARKAN HARGA
 # =========================================================
-elif menu == "💰 Rekomendasi Harga":
+elif menu == "Rekomendasi Berdasarkan Harga":
+
+    st.subheader("💰 Rekomendasi Berdasarkan Harga")
 
     pilihan = st.radio(
-
-        "Pilih Harga",
-
-        [
-            "Murah",
-            "Sedang",
-            "Mahal"
-        ]
+        "Pilih Kategori Harga",
+        ["Murah", "Sedang", "Mahal"]
     )
 
     semua = []
 
-    for kategori, isi in app.kategori.items():
-
-        for jenis, daftar in isi.items():
-
-            semua.extend(daftar)
+    for daftar in app.graph_rekomendasi.values():
+        semua.extend(daftar)
 
     if pilihan == "Murah":
 
-        hasil = [
-            x for x in semua
-            if x[1] <= 25000
-        ]
+        hasil = [x for x in semua if x[1] <= 25000]
 
     elif pilihan == "Sedang":
 
-        hasil = [
-            x for x in semua
-            if 25000 < x[1] <= 50000
-        ]
+        hasil = [x for x in semua if 25000 < x[1] <= 50000]
 
     else:
 
-        hasil = [
-            x for x in semua
-            if x[1] > 50000
-        ]
+        hasil = [x for x in semua if x[1] > 50000]
 
-    cols = st.columns(4)
+    for nama, harga in hasil:
 
-    for i, (nama, harga) in enumerate(hasil):
+        st.success(f"""
+🍽️ {nama}
 
-        with cols[i % 4]:
-
-            st.markdown(f"""
-            <div class='card'>
-
-            <div class='food-emoji'>
-            💰
-            </div>
-
-            <div class='food-name'>
-            {nama}
-            </div>
-
-            <div class='food-price'>
-            Rp{harga:,}
-            </div>
-
-            </div>
-            """, unsafe_allow_html=True)
+💰 Harga : Rp{harga:,}
+""")
 
 # =========================================================
-# ADMIN
+# FOOTER
 # =========================================================
-elif menu == "🔐 Admin":
-
-    st.subheader("🔐 Admin Dashboard")
-
-    kode = st.text_input(
-        "Masukkan kode admin",
-        type="password"
-    )
-
-    # KODE ADMIN
-    # GGBITES123
-
-    if kode == "GGBITES123":
-
-        st.success("Login berhasil!")
-
-        if len(st.session_state.orders) == 0:
-
-            st.info("Belum ada pesanan")
-
-        else:
-
-            for i, order in enumerate(
-                st.session_state.orders,
-                start=1
-            ):
-
-                st.markdown(f"""
-                <div class='card'>
-
-                <div class='food-emoji'>
-                📦
-                </div>
-
-                <div class='food-name'>
-                Order #{i}
-                </div>
-
-                <div>
-                👤 {order['nama']}<br>
-                💳 {order['pembayaran']}<br>
-                💰 Rp{order['total']:,}<br>
-                🕒 {order['waktu']}
-                </div>
-
-                </div>
-                """, unsafe_allow_html=True)
-
-                st.write("### Detail Pesanan")
-
-                for item, harga in order["pesanan"]:
-
-                    st.write(
-                        f"🍽️ {item} - Rp{harga:,}"
-                    )
+st.markdown("---")
+st.caption("🍽️ GG BITES © 2026 | Streamlit App")
