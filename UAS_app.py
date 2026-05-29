@@ -1,4 +1,5 @@
 import streamlit as st
+import random
 from datetime import datetime
 
 # =========================================================
@@ -11,7 +12,7 @@ st.set_page_config(
 )
 
 # =========================================================
-# SESSION
+# SESSION STATE
 # =========================================================
 if "cart" not in st.session_state:
     st.session_state.cart = []
@@ -29,29 +30,30 @@ class GGBitesGraph:
         self.emoji = {
 
             "Bakso": "🍜",
-            "Nasi Goreng": "🍚",
             "Burger": "🍔",
             "Pizza": "🍕",
             "Ayam Geprek": "🍗",
             "Steak": "🥩",
             "Kentang Goreng": "🍟",
+            "Donat": "🍩",
+            "Brownies": "🧁",
             "Boba Brown Sugar": "🧋",
             "Matcha Latte": "🍵",
-            "Milkshake": "🥛"
+            "Milkshake": "🥛",
+            "Lemon Tea": "🍋",
+            "Nasi Goreng": "🍚",
+            "Sushi": "🍣"
         }
 
+        # =================================================
+        # GRAPH REKOMENDASI
+        # =================================================
         self.graph_rekomendasi = {
 
             "Bakso": [
                 ("Bakso Jumbo", 25000),
                 ("Bakso Mercon", 22000),
                 ("Bakso Urat", 18000)
-            ],
-
-            "Nasi Goreng": [
-                ("Nasi Goreng Seafood", 35000),
-                ("Nasi Goreng Mawut", 25000),
-                ("Nasi Goreng Kampung", 18000)
             ],
 
             "Burger": [
@@ -78,10 +80,16 @@ class GGBitesGraph:
                 ("Wagyu Steak", 180000)
             ],
 
-            "Kentang Goreng": [
-                ("French Fries BBQ", 18000),
-                ("Loaded Fries", 35000),
-                ("French Fries Cheese", 25000)
+            "Donat": [
+                ("Donat Coklat", 12000),
+                ("Donat Oreo", 18000),
+                ("Donat Tiramisu", 22000)
+            ],
+
+            "Brownies": [
+                ("Brownies Almond", 35000),
+                ("Brownies Keju", 32000),
+                ("Brownies Lumer", 30000)
             ],
 
             "Boba Brown Sugar": [
@@ -100,6 +108,44 @@ class GGBitesGraph:
                 ("Chocolate Milkshake", 25000),
                 ("Vanilla Milkshake", 28000),
                 ("Oreo Milkshake", 35000)
+            ],
+
+            "Nasi Goreng": [
+                ("Nasi Goreng Seafood", 35000),
+                ("Nasi Goreng Mawut", 25000),
+                ("Nasi Goreng Kampung", 18000)
+            ],
+
+            "Sushi": [
+                ("Salmon Sushi", 25000),
+                ("Tamago Sushi", 18000),
+                ("Mentai Sushi", 35000)
+            ]
+        }
+
+        # =================================================
+        # GRAPH COMBO
+        # =================================================
+        self.graph_combo = {
+
+            "Burger": [
+                ("Kentang Goreng", 5),
+                ("Milkshake", 5)
+            ],
+
+            "Pizza": [
+                ("Lemon Tea", 4),
+                ("Kentang Goreng", 5)
+            ],
+
+            "Donat": [
+                ("Matcha Latte", 5),
+                ("Milkshake", 4)
+            ],
+
+            "Bakso": [
+                ("Lemon Tea", 4),
+                ("Kentang Goreng", 5)
             ]
         }
 
@@ -133,20 +179,12 @@ st.markdown("""
     margin-bottom:30px;
 }
 
-.box{
-    background:white;
-    padding:20px;
-    border-radius:25px;
-    text-align:center;
-    box-shadow:0 5px 15px rgba(0,0,0,0.08);
-    margin-bottom:20px;
-}
-
 .food-card{
     background:white;
     padding:25px;
     border-radius:25px;
     text-align:center;
+    margin-bottom:20px;
     box-shadow:0 5px 15px rgba(0,0,0,0.08);
     transition:0.3s;
 }
@@ -157,14 +195,15 @@ st.markdown("""
 
 .price{
     color:#ff5f99;
+    font-size:24px;
     font-weight:bold;
-    font-size:25px;
 }
 
-.cart-box{
+.box{
     background:white;
-    padding:25px;
+    padding:20px;
     border-radius:25px;
+    margin-bottom:20px;
     box-shadow:0 5px 15px rgba(0,0,0,0.08);
 }
 
@@ -194,110 +233,228 @@ Smart Food Recommendation & Ordering System
 """, unsafe_allow_html=True)
 
 # =========================================================
-# TOP MENU
+# SIDEBAR
 # =========================================================
-col1, col2, col3, col4 = st.columns(4)
+menu = st.sidebar.radio(
 
-with col1:
-    st.markdown("""
-    <div class="box">
-    🍽️ Menu
-    </div>
-    """, unsafe_allow_html=True)
+    "📋 MENU",
 
-with col2:
-    st.markdown("""
-    <div class="box">
-    ⭐ Top Rating
-    </div>
-    """, unsafe_allow_html=True)
-
-with col3:
-    st.markdown(f"""
-    <div class="box">
-    🛒 Cart ({len(st.session_state.cart)})
-    </div>
-    """, unsafe_allow_html=True)
-
-with col4:
-    st.markdown("""
-    <div class="box">
-    🔐 Admin
-    </div>
-    """, unsafe_allow_html=True)
-
-# =========================================================
-# SEARCH
-# =========================================================
-st.markdown("## 🔍 Cari Rekomendasi")
-
-search = st.text_input(
-    "Cari menu favoritmu..."
+    [
+        "🍽️ Menu",
+        "🔍 Cari Rekomendasi",
+        "⭐ Top Rating",
+        "💡 Combo Recommendation",
+        "🎲 Random Pick",
+        "💰 Rekomendasi Harga",
+        "🛒 Cart",
+        "🔐 Admin"
+    ]
 )
 
 # =========================================================
-# HASIL SEARCH
+# MENU MAKANAN
 # =========================================================
-if search:
+if menu == "🍽️ Menu":
 
-    ditemukan = False
+    st.markdown("## 🍽️ Daftar Menu")
 
-    for menu, daftar in app.graph_rekomendasi.items():
+    cols = st.columns(3)
 
-        if search.lower() in menu.lower():
+    nomor = 0
 
-            ditemukan = True
+    for menu_utama, daftar in app.graph_rekomendasi.items():
 
-            st.subheader(f"✨ {menu}")
+        for nama, harga in daftar:
 
-            cols = st.columns(3)
+            with cols[nomor % 3]:
 
-            for i, (nama, harga) in enumerate(daftar):
+                st.markdown(f"""
+                <div class="food-card">
+                <h1>{app.emoji.get(menu_utama,"🍽️")}</h1>
+                <h2>{nama}</h2>
+                <p class="price">
+                Rp{harga:,}
+                </p>
+                </div>
+                """, unsafe_allow_html=True)
 
-                with cols[i % 3]:
+                if st.button(f"Tambah {nama}"):
 
-                    st.markdown(f"""
-                    <div class="food-card">
-                    <h1>{app.emoji.get(menu,"🍽️")}</h1>
-                    <h3>{nama}</h3>
-                    <p class="price">
-                    Rp{harga:,}
-                    </p>
-                    </div>
-                    """, unsafe_allow_html=True)
-
-                    # AUTO MASUK CART
                     st.session_state.cart.append({
+
                         "nama": nama,
                         "harga": harga
                     })
 
-    if not ditemukan:
-        st.error("❌ Menu tidak ditemukan")
+                    st.success(f"{nama} masuk cart!")
+
+            nomor += 1
 
 # =========================================================
-# MENU UTAMA
+# SEARCH
 # =========================================================
-st.markdown("## 🍽️ Menu Makanan")
+elif menu == "🔍 Cari Rekomendasi":
 
-all_menu = []
+    st.markdown("## 🔍 Cari Rekomendasi")
 
-for daftar in app.graph_rekomendasi.values():
-    all_menu.extend(daftar)
+    search = st.text_input(
+        "Cari menu favorit..."
+    )
 
-cols = st.columns(3)
+    if search:
 
-nomor = 0
+        ditemukan = False
 
-for menu, daftar in app.graph_rekomendasi.items():
+        for menu_utama, daftar in app.graph_rekomendasi.items():
 
-    for nama, harga in daftar:
+            if search.lower() in menu_utama.lower():
 
-        with cols[nomor % 3]:
+                ditemukan = True
+
+                st.subheader(f"✨ {menu_utama}")
+
+                cols = st.columns(3)
+
+                for i, (nama, harga) in enumerate(daftar):
+
+                    with cols[i % 3]:
+
+                        st.markdown(f"""
+                        <div class="food-card">
+                        <h1>{app.emoji.get(menu_utama,"🍽️")}</h1>
+                        <h3>{nama}</h3>
+                        <p class="price">
+                        Rp{harga:,}
+                        </p>
+                        </div>
+                        """, unsafe_allow_html=True)
+
+        if not ditemukan:
+            st.error("❌ Menu tidak ditemukan")
+
+# =========================================================
+# TOP RATING
+# =========================================================
+elif menu == "⭐ Top Rating":
+
+    st.markdown("## ⭐ Top Rating")
+
+    top_rating = [
+
+        "Wagyu Steak",
+        "Pizza Supreme",
+        "Premium Matcha Latte",
+        "Double Beef Burger"
+    ]
+
+    cols = st.columns(4)
+
+    for i, item in enumerate(top_rating):
+
+        with cols[i]:
+
+            st.markdown(f"""
+            <div class="box">
+            <h2>{item}</h2>
+            ⭐⭐⭐⭐⭐
+            </div>
+            """, unsafe_allow_html=True)
+
+# =========================================================
+# COMBO RECOMMENDATION
+# =========================================================
+elif menu == "💡 Combo Recommendation":
+
+    st.markdown("## 💡 Combo Recommendation")
+
+    for makanan, combo in app.graph_combo.items():
+
+        st.markdown(f"""
+        <div class="box">
+        <h2>{app.emoji.get(makanan,"🍽️")} {makanan}</h2>
+        """, unsafe_allow_html=True)
+
+        for item, rating in combo:
+
+            st.write(
+                f"✨ {item} | {'⭐' * rating}"
+            )
+
+        st.markdown("</div>", unsafe_allow_html=True)
+
+# =========================================================
+# RANDOM PICK
+# =========================================================
+elif menu == "🎲 Random Pick":
+
+    st.markdown("## 🎲 Random Pick")
+
+    semua_menu = []
+
+    for daftar in app.graph_rekomendasi.values():
+        semua_menu.extend(daftar)
+
+    pick = random.choice(semua_menu)
+
+    st.markdown(f"""
+    <div class="food-card">
+    <h1>🎲</h1>
+    <h2>{pick[0]}</h2>
+    <p class="price">
+    Rp{pick[1]:,}
+    </p>
+    </div>
+    """, unsafe_allow_html=True)
+
+# =========================================================
+# REKOMENDASI HARGA
+# =========================================================
+elif menu == "💰 Rekomendasi Harga":
+
+    st.markdown("## 💰 Rekomendasi Harga")
+
+    pilihan = st.radio(
+
+        "Pilih Harga",
+
+        [
+            "Murah",
+            "Sedang",
+            "Mahal"
+        ]
+    )
+
+    semua = []
+
+    for daftar in app.graph_rekomendasi.values():
+        semua.extend(daftar)
+
+    if pilihan == "Murah":
+
+        hasil = [
+            x for x in semua if x[1] <= 25000
+        ]
+
+    elif pilihan == "Sedang":
+
+        hasil = [
+            x for x in semua if 25000 < x[1] <= 50000
+        ]
+
+    else:
+
+        hasil = [
+            x for x in semua if x[1] > 50000
+        ]
+
+    cols = st.columns(3)
+
+    for i, (nama, harga) in enumerate(hasil):
+
+        with cols[i % 3]:
 
             st.markdown(f"""
             <div class="food-card">
-            <h1>{app.emoji.get(menu,"🍽️")}</h1>
             <h2>{nama}</h2>
             <p class="price">
             Rp{harga:,}
@@ -305,140 +462,120 @@ for menu, daftar in app.graph_rekomendasi.items():
             </div>
             """, unsafe_allow_html=True)
 
-            # KLIK LANGSUNG TAMBAH
-            if st.button(f"Tambah {nama}"):
-
-                st.session_state.cart.append({
-                    "nama": nama,
-                    "harga": harga
-                })
-
-                st.success(f"{nama} masuk keranjang")
-
-        nomor += 1
-
 # =========================================================
 # CART
 # =========================================================
-st.markdown("## 🛒 Pesanan Kamu")
+elif menu == "🛒 Cart":
 
-st.markdown('<div class="cart-box">', unsafe_allow_html=True)
+    st.markdown("## 🛒 Pesanan Kamu")
 
-if len(st.session_state.cart) == 0:
+    if len(st.session_state.cart) == 0:
 
-    st.warning("Belum ada pesanan")
+        st.warning("Belum ada pesanan")
 
-else:
+    else:
 
-    total = 0
+        total = 0
 
-    for item in st.session_state.cart:
+        for item in st.session_state.cart:
 
-        st.write(f"🍽️ {item['nama']} - Rp{item['harga']:,}")
+            st.markdown(f"""
+            <div class="box">
+            🍽️ {item['nama']}
+            <br>
+            💰 Rp{item['harga']:,}
+            </div>
+            """, unsafe_allow_html=True)
 
-        total += item["harga"]
+            total += item["harga"]
 
-    st.markdown("---")
+        st.subheader(f"💰 Total : Rp{total:,}")
 
-    st.subheader(f"💰 Total : Rp{total:,}")
+        nama = st.text_input("Nama Pemesan")
 
-    nama = st.text_input("Nama Pemesan")
+        pembayaran = st.selectbox(
 
-    pembayaran = st.selectbox(
-        "Metode Pembayaran",
-        ["QRIS", "Cash", "OVO", "DANA", "GoPay"]
-    )
+            "Metode Pembayaran",
 
-    if st.button("Checkout"):
+            [
+                "QRIS",
+                "Cash",
+                "DANA",
+                "OVO",
+                "GoPay"
+            ]
+        )
 
-        data_order = {
+        if st.button("Checkout"):
 
-            "nama": nama,
-            "pesanan": st.session_state.cart,
-            "total": total,
-            "pembayaran": pembayaran,
-            "waktu": datetime.now().strftime("%d/%m/%Y %H:%M")
-        }
+            data_order = {
 
-        st.session_state.orders.append(data_order)
+                "nama": nama,
+                "pesanan": st.session_state.cart,
+                "total": total,
+                "pembayaran": pembayaran,
+                "waktu": datetime.now().strftime("%d/%m/%Y %H:%M")
+            }
 
-        st.success("✅ Pesanan berhasil dibuat!")
+            st.session_state.orders.append(data_order)
 
-        st.balloons()
+            st.success("✅ Pesanan berhasil dibuat!")
 
-        st.session_state.cart = []
+            st.balloons()
 
-st.markdown("</div>", unsafe_allow_html=True)
-
-# =========================================================
-# TOP RATING
-# =========================================================
-st.markdown("## ⭐ Top Rating")
-
-top_rating = [
-    "Wagyu Steak",
-    "Pizza Supreme",
-    "Premium Matcha Latte",
-    "Double Beef Burger"
-]
-
-cols = st.columns(4)
-
-for i, item in enumerate(top_rating):
-
-    with cols[i]:
-
-        st.markdown(f"""
-        <div class="box">
-        <h3>{item}</h3>
-        ⭐⭐⭐⭐⭐
-        </div>
-        """, unsafe_allow_html=True)
+            st.session_state.cart = []
 
 # =========================================================
 # ADMIN
 # =========================================================
-st.markdown("## 🔐 Admin Dashboard")
+elif menu == "🔐 Admin":
 
-admin = st.text_input(
-    "Masukkan Kode Admin",
-    type="password"
-)
+    st.markdown("## 🔐 Admin Dashboard")
 
-# KODE ADMIN
-# =========================
-# GGBITES123
-# =========================
+    admin = st.text_input(
 
-if admin == "GGBITES123":
+        "Masukkan Kode Admin",
+        type="password"
+    )
 
-    st.success("✅ Admin berhasil login")
+    # =====================================================
+    # KODE ADMIN
+    # =====================================================
+    # GGBITES123
 
-    if len(st.session_state.orders) == 0:
+    if admin == "GGBITES123":
 
-        st.info("Belum ada pesanan")
+        st.success("✅ Login Admin Berhasil")
 
-    else:
+        if len(st.session_state.orders) == 0:
 
-        for i, order in enumerate(st.session_state.orders, start=1):
+            st.info("Belum ada pesanan")
 
-            st.markdown(f"""
-            <div class="cart-box">
-            <h3>📦 Order #{i}</h3>
-            <p>👤 Nama : {order['nama']}</p>
-            <p>💳 Pembayaran : {order['pembayaran']}</p>
-            <p>💰 Total : Rp{order['total']:,}</p>
-            <p>🕒 Waktu : {order['waktu']}</p>
-            </div>
-            """, unsafe_allow_html=True)
+        else:
 
-            st.write("### 🍽️ Detail Pesanan")
+            for i, order in enumerate(
+                st.session_state.orders,
+                start=1
+            ):
 
-            for item in order["pesanan"]:
+                st.markdown(f"""
+                <div class="box">
+                <h3>📦 Order #{i}</h3>
 
-                st.write(
-                    f"- {item['nama']} | Rp{item['harga']:,}"
-                )
+                👤 {order['nama']} <br>
+                💳 {order['pembayaran']} <br>
+                💰 Rp{order['total']:,} <br>
+                🕒 {order['waktu']}
+                </div>
+                """, unsafe_allow_html=True)
+
+                st.write("### 🍽️ Detail Pesanan")
+
+                for item in order["pesanan"]:
+
+                    st.write(
+                        f"- {item['nama']} | Rp{item['harga']:,}"
+                    )
 
 # =========================================================
 # FOOTER
