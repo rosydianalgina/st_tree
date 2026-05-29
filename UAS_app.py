@@ -509,8 +509,8 @@ else:
                             </div>
                             <div>
                              ⭐ {rating}
-                             <\div>
-                             <\div>
+                            <\div>
+                            <\div>
                             """, unsafe_allow_html=True)
 
             if not ditemukan:
