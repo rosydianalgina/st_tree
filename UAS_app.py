@@ -188,7 +188,7 @@ class GGBitesGraph:
                     ("Mocha Latte", 42000, 5)
                 ]
             }
-        }
+        
 
 
         self.graph_combo = {
