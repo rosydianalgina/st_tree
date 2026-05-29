@@ -63,7 +63,7 @@ class GGBitesGraph:
 
         }
 
-        self.kategori = {
+         self.kategori = {
 
             "🍔 Makanan Berat": {
 
