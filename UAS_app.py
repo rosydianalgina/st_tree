@@ -446,7 +446,7 @@ else:
 
                 cols = st.columns(4)
 
-                for i, (nama, harga) in enumerate(daftar):
+                for i, (nama, harga, rating) in enumerate(daftar):
 
                     with cols[i % 4]:
 
@@ -482,7 +482,7 @@ else:
 
             ditemukan = False
 
-            for menu_combo, rekom in app.combo.items():
+            for menu_combo, rekom in app.graph_combo.items():
 
                 if cari.lower() in menu_combo.lower():
 
@@ -492,7 +492,7 @@ else:
 
                     cols = st.columns(len(rekom))
 
-                    for i, item in enumerate(rekom):
+                    for i, (nama, harga, rating) in enumerate(rekom):
 
                         with cols[i]:
 
@@ -502,9 +502,15 @@ else:
                             {app.emoji.get(item,'🍽')}
                             </div>
                             <div class="food-name">
-                            {item}
+                            {nama}
                             </div>
+                            <div class="food-price">
+                            Rp{harga:,}
                             </div>
+                            <div>
+                             ⭐ {rating}
+                             <\div>
+                             <\div>
                             """, unsafe_allow_html=True)
 
             if not ditemukan:
@@ -551,6 +557,7 @@ else:
         <div class="food-name">{pick[0]}</div>
         <div class="food-price">Rp{pick[1]:,}</div>
         </div>
+        <div>  ⭐ {pick[2]<\div>
         """, unsafe_allow_html=True)
 
     elif menu == "💰 Rekomendasi Harga":
@@ -579,7 +586,7 @@ else:
 
         cols = st.columns(4)
 
-        for i, (nama, harga) in enumerate(hasil):
+        for i, (nama, harga, rating) in enumerate(hasil):
 
             with cols[i % 4]:
 
@@ -609,7 +616,7 @@ else:
 
             ditemukan = False
 
-            for i, (nama, harga) in enumerate(semua):
+            for i, (nama, harga, rating) in enumerate(semua):
 
                 if keyword.lower() in nama.lower():
 
