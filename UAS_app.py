@@ -39,35 +39,18 @@ class GGBitesGraph:
             "Burger": "🍔",
             "Pizza": "🍕",
             "Steak": "🥩",
-            "Sate Ayam": "🍢",
-            "Soto": "🥣",
 
             "Kentang Goreng": "🍟",
             "Cilok": "🍡",
             "Batagor": "🥟",
-            "Sosis Bakar": "🌭",
-            "Roti Bakar": "🍞",
-            "Siomay": "🥠",
-            "Dimsum": "🥢",
-            "Corndog": "🧀",
 
             "Donat": "🍩",
             "Brownies": "🧁",
             "Es Krim": "🍦",
-            "Cheesecake": "🍰",
-            "Waffle": "🧇",
-            "Pancake": "🥞",
-            "Coklat Dubai": "🍫",
 
             "Thai Tea": "🥤",
             "Boba Brown Sugar": "🧋",
-            "Kopi Latte": "☕",
-            "Milkshake": "🥛",
-            "Es Jeruk": "🍊",
-            "Lemon Tea": "🍋",
-            "Matcha Latte": "🍵",
-            "Yakult": "🍹"
-
+            "Matcha Latte": "🍵"
         }
 
         # =================================================
@@ -201,7 +184,7 @@ class GGBitesGraph:
         }
 
         # =================================================
-        # GRAPH COMBO
+        # COMBO
         # =================================================
         self.graph_combo = {
 
@@ -218,14 +201,12 @@ class GGBitesGraph:
             "Bakso": [
                 ("Es Jeruk", 5),
                 ("Kentang Goreng", 4)
-            ],
-
-            "Donat": [
-                ("Kopi Latte", 5),
-                ("Thai Tea", 4)
             ]
         }
 
+# =========================================================
+# OBJECT
+# =========================================================
 app = GGBitesGraph()
 
 # =========================================================
@@ -235,20 +216,30 @@ st.markdown("""
 <style>
 
 .stApp{
-    background:#f6f3ef;
+    background:linear-gradient(
+        to bottom right,
+        #f8f5f1,
+        #fffaf7
+    );
 }
 
 /* HEADER */
 
+.main-header{
+    text-align:center;
+    margin-bottom:40px;
+}
+
 .title{
-    font-size:55px;
-    font-weight:bold;
+    font-size:70px;
+    font-weight:900;
     color:#ff5b93;
 }
 
 .subtitle{
-    color:#777;
-    margin-bottom:25px;
+    font-size:22px;
+    color:#666;
+    margin-top:-10px;
 }
 
 /* CATEGORY */
@@ -256,9 +247,19 @@ st.markdown("""
 .category-title{
     font-size:35px;
     font-weight:bold;
-    margin-top:30px;
-    margin-bottom:20px;
     color:#333;
+    margin-top:40px;
+    margin-bottom:20px;
+}
+
+/* SUB MENU */
+
+.sub-menu{
+    font-size:24px;
+    font-weight:bold;
+    color:#555;
+    margin-top:20px;
+    margin-bottom:15px;
 }
 
 /* CARD */
@@ -266,42 +267,57 @@ st.markdown("""
 .card{
 
     background:white;
+
     border-radius:25px;
+
     padding:20px;
+
+    height:280px;
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:space-between;
+
+    align-items:center;
+
     text-align:center;
-    margin-bottom:20px;
+
     box-shadow:0 4px 15px rgba(0,0,0,0.08);
+
+    margin-bottom:20px;
+
     transition:0.3s;
 }
 
 .card:hover{
+
     transform:translateY(-5px);
+
+    box-shadow:0 8px 20px rgba(0,0,0,0.12);
 }
+
+/* EMOJI */
 
 .food-emoji{
-    font-size:55px;
+    font-size:60px;
 }
+
+/* NAME */
 
 .food-name{
-    font-size:22px;
+    font-size:20px;
     font-weight:bold;
+    color:#333;
 }
+
+/* PRICE */
 
 .food-price{
-    color:#ff5b93;
     font-size:24px;
     font-weight:bold;
-}
-
-/* CART */
-
-.cart-box{
-    background:white;
-    border-radius:25px;
-    padding:20px;
-    box-shadow:0 4px 15px rgba(0,0,0,0.08);
-    position:sticky;
-    top:20px;
+    color:#ff5b93;
 }
 
 /* BUTTON */
@@ -309,26 +325,50 @@ st.markdown("""
 .stButton > button{
 
     width:100%;
+
     border:none;
+
     border-radius:15px;
+
+    padding:12px;
+
     background:linear-gradient(
-    90deg,
-    #ff8ab3,
-    #ff5b93
+        90deg,
+        #ff8ab3,
+        #ff5b93
     );
 
     color:white;
+
+    font-size:16px;
+
     font-weight:bold;
-    padding:12px;
 }
 
 .stButton > button:hover{
 
     background:linear-gradient(
-    90deg,
-    #ff5b93,
-    #ff8ab3
+        90deg,
+        #ff5b93,
+        #ff8ab3
     );
+}
+
+/* CART */
+
+.cart-box{
+
+    background:white;
+
+    border-radius:25px;
+
+    padding:25px;
+
+    box-shadow:0 4px 15px rgba(0,0,0,0.08);
+
+    position:sticky;
+
+    top:20px;
 }
 
 </style>
@@ -338,12 +378,16 @@ st.markdown("""
 # HEADER
 # =========================================================
 st.markdown("""
+<div class='main-header'>
+
 <div class='title'>
-💖 GG BITES
+💖 GG BITES 💖
 </div>
 
 <div class='subtitle'>
 McD Style Food Ordering System
+</div>
+
 </div>
 """, unsafe_allow_html=True)
 
@@ -387,9 +431,11 @@ if menu == "🍔 Order Menu":
 
             for jenis_menu, daftar_menu in isi.items():
 
-                st.subheader(
-                    f"{app.emoji.get(jenis_menu,'🍽️')} {jenis_menu}"
-                )
+                st.markdown(f"""
+                <div class='sub-menu'>
+                {app.emoji.get(jenis_menu,'🍽️')} {jenis_menu}
+                </div>
+                """, unsafe_allow_html=True)
 
                 cols = st.columns(4)
 
@@ -400,23 +446,23 @@ if menu == "🍔 Order Menu":
                         st.markdown(f"""
                         <div class='card'>
 
-                        <div class='food-emoji'>
-                        {app.emoji.get(jenis_menu,'🍽️')}
-                        </div>
+                            <div class='food-emoji'>
+                            {app.emoji.get(jenis_menu,'🍽️')}
+                            </div>
 
-                        <div class='food-name'>
-                        {nama}
-                        </div>
+                            <div class='food-name'>
+                            {nama}
+                            </div>
 
-                        <div class='food-price'>
-                        Rp{harga:,}
-                        </div>
+                            <div class='food-price'>
+                            Rp{harga:,}
+                            </div>
 
                         </div>
                         """, unsafe_allow_html=True)
 
                         if st.button(
-                            f"Tambah",
+                            "🛒 Tambah",
                             key=nama
                         ):
 
@@ -425,7 +471,7 @@ if menu == "🍔 Order Menu":
                             )
 
                             st.success(
-                                f"{nama} masuk cart!"
+                                f"{nama} ditambahkan!"
                             )
 
     # =====================================================
@@ -476,20 +522,18 @@ if menu == "🍔 Order Menu":
                 ]
             )
 
-            # =============================================
             # QRIS
-            # =============================================
             if pembayaran == "QRIS":
 
                 st.image(
                     "https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=GGBITESPAYMENT"
                 )
 
-                st.info(
-                    "Scan QRIS untuk pembayaran"
+                st.success(
+                    "Silahkan scan QRIS"
                 )
 
-            if st.button("Checkout"):
+            if st.button("✅ Checkout"):
 
                 data = {
 
@@ -503,7 +547,7 @@ if menu == "🍔 Order Menu":
                 st.session_state.orders.append(data)
 
                 st.success(
-                    "✅ Pesanan berhasil dibuat!"
+                    "Pesanan berhasil dibuat!"
                 )
 
                 st.balloons()
@@ -513,7 +557,7 @@ if menu == "🍔 Order Menu":
         st.markdown("</div>", unsafe_allow_html=True)
 
 # =========================================================
-# SEARCH
+# SEARCH MENU
 # =========================================================
 elif menu == "🔍 Cari Rekomendasi":
 
@@ -545,12 +589,24 @@ elif menu == "🔍 Cari Rekomendasi":
 
                             st.markdown(f"""
                             <div class='card'>
-                            <h3>{nama}</h3>
-                            <h2>Rp{harga:,}</h2>
+
+                            <div class='food-emoji'>
+                            🔍
+                            </div>
+
+                            <div class='food-name'>
+                            {nama}
+                            </div>
+
+                            <div class='food-price'>
+                            Rp{harga:,}
+                            </div>
+
                             </div>
                             """, unsafe_allow_html=True)
 
         if not ditemukan:
+
             st.error("❌ Menu tidak ditemukan")
 
 # =========================================================
@@ -558,59 +614,88 @@ elif menu == "🔍 Cari Rekomendasi":
 # =========================================================
 elif menu == "⭐ Top Rating":
 
-    st.subheader("⭐ Top Rating")
-
     top = [
 
-        "Wagyu Steak",
-        "Pizza Supreme",
-        "Double Beef Burger",
-        "Premium Matcha Latte",
-        "Cheesecake Blueberry"
+        ("Wagyu Steak", "⭐⭐⭐⭐⭐"),
+        ("Pizza Supreme", "⭐⭐⭐⭐⭐"),
+        ("Double Beef Burger", "⭐⭐⭐⭐⭐"),
+        ("Premium Matcha Latte", "⭐⭐⭐⭐⭐")
     ]
 
-    cols = st.columns(5)
+    cols = st.columns(4)
 
-    for i, item in enumerate(top):
+    for i, (nama, rating) in enumerate(top):
 
         with cols[i]:
 
             st.markdown(f"""
             <div class='card'>
-            <h2>{item}</h2>
-            ⭐⭐⭐⭐⭐
+
+            <div class='food-emoji'>
+            🏆
+            </div>
+
+            <div class='food-name'>
+            {nama}
+            </div>
+
+            <div class='food-price'>
+            {rating}
+            </div>
+
             </div>
             """, unsafe_allow_html=True)
 
 # =========================================================
-# COMBO
+# COMBO RECOMMENDATION
 # =========================================================
 elif menu == "💡 Combo Recommendation":
 
     st.subheader("💡 Combo Recommendation")
 
-    cols = st.columns(2)
+    cari_combo = st.text_input(
+        "Cari combo..."
+    )
 
-    nomor = 0
+    if cari_combo:
 
-    for makanan, combo in app.graph_combo.items():
+        ditemukan = False
 
-        with cols[nomor % 2]:
+        for makanan, combo in app.graph_combo.items():
 
-            st.markdown(f"""
-            <div class='card'>
-            <h2>🍽️ {makanan}</h2>
-            """, unsafe_allow_html=True)
+            if cari_combo.lower() in makanan.lower():
 
-            for item, rating in combo:
+                ditemukan = True
 
-                st.write(
-                    f"✨ {item} {'⭐' * rating}"
-                )
+                st.markdown(f"## 🍽️ {makanan}")
 
-            st.markdown("</div>", unsafe_allow_html=True)
+                cols = st.columns(2)
 
-        nomor += 1
+                for i, (item, rating) in enumerate(combo):
+
+                    with cols[i % 2]:
+
+                        st.markdown(f"""
+                        <div class='card'>
+
+                        <div class='food-emoji'>
+                        ✨
+                        </div>
+
+                        <div class='food-name'>
+                        {item}
+                        </div>
+
+                        <div class='food-price'>
+                        {'⭐' * rating}
+                        </div>
+
+                        </div>
+                        """, unsafe_allow_html=True)
+
+        if not ditemukan:
+
+            st.error("❌ Combo tidak ditemukan")
 
 # =========================================================
 # RANDOM PICK
@@ -672,7 +757,8 @@ elif menu == "💰 Rekomendasi Harga":
     if pilihan == "Murah":
 
         hasil = [
-            x for x in semua if x[1] <= 25000
+            x for x in semua
+            if x[1] <= 25000
         ]
 
     elif pilihan == "Sedang":
@@ -685,7 +771,8 @@ elif menu == "💰 Rekomendasi Harga":
     else:
 
         hasil = [
-            x for x in semua if x[1] > 50000
+            x for x in semua
+            if x[1] > 50000
         ]
 
     cols = st.columns(4)
@@ -696,8 +783,19 @@ elif menu == "💰 Rekomendasi Harga":
 
             st.markdown(f"""
             <div class='card'>
-            <h3>{nama}</h3>
-            <h2>Rp{harga:,}</h2>
+
+            <div class='food-emoji'>
+            💰
+            </div>
+
+            <div class='food-name'>
+            {nama}
+            </div>
+
+            <div class='food-price'>
+            Rp{harga:,}
+            </div>
+
             </div>
             """, unsafe_allow_html=True)
 
@@ -709,7 +807,7 @@ elif menu == "🔐 Admin":
     st.subheader("🔐 Admin Dashboard")
 
     kode = st.text_input(
-        "Masukkan Kode Admin",
+        "Masukkan kode admin",
         type="password"
     )
 
@@ -718,7 +816,7 @@ elif menu == "🔐 Admin":
 
     if kode == "GGBITES123":
 
-        st.success("✅ Login berhasil")
+        st.success("Login berhasil!")
 
         if len(st.session_state.orders) == 0:
 
@@ -734,12 +832,20 @@ elif menu == "🔐 Admin":
                 st.markdown(f"""
                 <div class='card'>
 
-                <h2>📦 Order #{i}</h2>
+                <div class='food-emoji'>
+                📦
+                </div>
 
-                👤 {order['nama']} <br>
-                💳 {order['pembayaran']} <br>
-                💰 Rp{order['total']:,} <br>
+                <div class='food-name'>
+                Order #{i}
+                </div>
+
+                <div>
+                👤 {order['nama']}<br>
+                💳 {order['pembayaran']}<br>
+                💰 Rp{order['total']:,}<br>
                 🕒 {order['waktu']}
+                </div>
 
                 </div>
                 """, unsafe_allow_html=True)
