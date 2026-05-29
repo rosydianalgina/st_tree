@@ -11,7 +11,7 @@ from datetime import datetime
 # =========================================================
 st.set_page_config(
     page_title="GG BITES",
-    page_icon="🍔",
+    page_icon="🍽️",
     layout="wide"
 )
 
@@ -23,7 +23,7 @@ class GGBitesGraph:
     def __init__(self):
 
         self.admin_code = "GGBITES_ADMIN"
-
+        
         self.emoji = {
             "Bakso": "🍜",
             "Mie Ayam": "🍜",
@@ -32,154 +32,105 @@ class GGBitesGraph:
             "Burger": "🍔",
             "Pizza": "🍕",
             "Steak": "🥩",
+            "Sate Ayam": "🍢",
+            "Soto": "🥣",
+
             "Kentang Goreng": "🍟",
             "Cilok": "🍡",
             "Batagor": "🥟",
+            "Sosis Bakar": "🌭",
+            "Roti Bakar": "🍞",
+            "Siomay": "🥠",
+            "Dimsum": "🥢",
+            "Corndog": "🧀",
+
             "Donat": "🍩",
             "Brownies": "🧁",
             "Es Krim": "🍦",
+            "Cheesecake": "🧀",
+            "Waffle": "🧇",
+            "Pancake": "🥞",
+            "Coklat Dubai": "🍫",
+
             "Thai Tea": "🥤",
             "Boba Brown Sugar": "🧋",
             "Kopi Latte": "☕",
             "Milkshake": "🥛",
+            "Es Jeruk": "🍊",
+            "Lemon Tea": "🍋",
             "Matcha Latte": "🍵",
             "Yakult": "🍹"
         }
-
+        
         self.kategori = {
-
-            "🍔 Makanan Berat": {
-
-                "Bakso": [
-                    ("Bakso Urat", 18000),
-                    ("Bakso Jumbo", 25000),
-                    ("Bakso Mercon", 22000),
-                    ("Bakso Halus", 17000)
-                ],
-
-                "Mie Ayam": [
-                    ("Mie Ayam Bakso", 20000),
-                    ("Mie Ayam Ceker", 23000),
-                    ("Mie Ayam Pangsit", 18000),
-                    ("Mie Ayam Jumbo", 27000)
-                ],
-
-                "Nasi Goreng": [
-                    ("Nasi Goreng Seafood", 35000),
-                    ("Nasi Goreng Kampung", 18000),
-                    ("Nasi Goreng Mawut", 25000),
-                    ("Nasi Goreng Spesial", 30000)
-                ],
-
-                "Ayam Geprek": [
-                    ("Ayam Geprek Mozarella", 35000),
-                    ("Ayam Geprek Keju", 30000),
-                    ("Ayam Geprek Sambal Matah", 28000),
-                    ("Ayam Geprek Jumbo", 40000)
-                ],
-
-                "Burger": [
-                    ("Cheese Burger", 25000),
-                    ("Double Beef Burger", 45000),
-                    ("Chicken Burger", 22000),
-                    ("BBQ Burger", 35000)
-                ],
-
-                "Pizza": [
-                    ("Pizza Pepperoni", 70000),
-                    ("Pizza Mozarella", 80000),
-                    ("Pizza Supreme", 95000),
-                    ("Pizza Beef", 85000)
-                ],
-
-                "Steak": [
-                    ("Chicken Steak", 50000),
-                    ("Sirloin Steak", 85000),
-                    ("Tenderloin Steak", 120000),
-                    ("Wagyu Steak", 180000)
-                ]
-            },
-
-            "🍟 Makanan Ringan": {
-
-                "Kentang Goreng": [
-                    ("French Fries BBQ", 18000),
-                    ("French Fries Cheese", 25000),
-                    ("French Fries Spicy", 20000),
-                    ("Loaded Fries", 35000)
-                ],
-
-                "Cilok": [
-                    ("Cilok Kuah", 12000),
-                    ("Cilok Pedas", 15000),
-                    ("Cilok Mozarella", 22000),
-                    ("Cilok Isi Ayam", 18000)
-                ],
-
-                "Batagor": [
-                    ("Batagor Kuah", 20000),
-                    ("Batagor Kering", 18000),
-                    ("Batagor Mozarella", 30000),
-                    ("Batagor Spesial", 35000)
-                ]
-            },
-
-            "🍰 Dessert": {
-
-                "Donat": [
-                    ("Donat Coklat", 12000),
-                    ("Donat Strawberry", 15000),
-                    ("Donat Oreo", 18000),
-                    ("Donat Tiramisu", 22000)
-                ],
-
-                "Brownies": [
-                    ("Brownies Kukus", 25000),
-                    ("Brownies Lumer", 30000),
-                    ("Brownies Almond", 35000),
-                    ("Brownies Keju", 32000)
-                ],
-
-                "Es Krim": [
-                    ("Es Krim Vanilla", 15000),
-                    ("Es Krim Coklat", 18000),
-                    ("Es Krim Strawberry", 20000),
-                    ("Es Krim Matcha", 28000)
-                ]
-            },
-
-            "🥤 Minuman": {
-
-                "Thai Tea": [
-                    ("Thai Tea Original", 15000),
-                    ("Thai Tea Cheese", 25000),
-                    ("Thai Tea Brown Sugar", 30000),
-                    ("Thai Tea Jumbo", 22000)
-                ],
-
-                "Boba Brown Sugar": [
-                    ("Brown Sugar Fresh Milk", 30000),
-                    ("Brown Sugar Regal", 35000),
-                    ("Brown Sugar Oreo", 40000),
-                    ("Brown Sugar Cheese", 45000)
-                ],
-
-                "Kopi Latte": [
-                    ("Vanilla Latte", 30000),
-                    ("Hazelnut Latte", 35000),
-                    ("Caramel Latte", 38000),
-                    ("Mocha Latte", 42000)
-                ]
-            }
+            "Makanan Berat": [
+                "Bakso",
+                "Mie Ayam",
+                "Nasi Goreng",
+                "Ayam Geprek",
+                "Burger",
+                "Pizza",
+                "Steak",
+                "Sate Ayam",
+                "Soto"
+            ],
+            "Makanan Ringan": [
+                "Kentang Goreng",
+                "Cilok",
+                "Batagor",
+                "Sosis Bakar",
+                "Roti Bakar",
+                "Siomay",
+                "Dimsum",
+                "Corndog"
+            ],
+            "Dessert": [
+                "Donat",
+                "Brownies",
+                "Es Krim",
+                "Cheesecake",
+                "Waffle",
+                "Pancake",
+                "Coklat Dubai"
+            ],
+            "Minuman": [
+                "Thai Tea",
+                "Boba Brown Sugar",
+                "Kopi Latte",
+                "Milkshake",
+                "Es Jeruk",
+                "Lemon Tea",
+                "Matcha Latte",
+                "Yakult"
+            ]
         }
 
-        self.combo = {
-            "Burger": ["Milkshake", "Kentang Goreng"],
-            "Pizza": ["Thai Tea", "Kentang Goreng"],
-            "Bakso": ["Es Krim", "Cilok"],
-            "Steak": ["Matcha Latte", "Brownies"]
+       self.graph_combo = {
+            "Bakso": [
+                ("Es Jeruk", 5),
+                ("Kentang Goreng", 4)
+            ],
+            "Burger": [
+                ("Milkshake", 5),
+                ("Kentang Goreng", 5)
+            ],
+            "Pizza": [
+                ("Lemon Tea", 4),
+                ("Kentang Goreng", 5)
+            ],
+            "Steak": [
+                ("Cheesecake", 4),
+                ("Matcha Latte", 5)
+            ],
+            "Donat": [
+                ("Kopi Latte", 5),
+                ("Thai Tea", 4)
+            ],
+            "Brownies": [
+                ("Es Krim", 5),
+                ("Kopi Latte", 5)
+            ]
         }
-
 app = GGBitesGraph()
 
 # =========================================================
