@@ -24,7 +24,7 @@ class GGBitesGraph:
 
         self.admin_code = "GGBITES_ADMIN"
         
-           self.emoji = {
+        self.emoji = {
             "Bakso": "🍜",
             "Mie Ayam": "🍜",
             "Nasi Goreng": "🍚",
