@@ -558,6 +558,7 @@ else:
         <div class="food-price">Rp{pick[1]:,}</div>
         </div>
         <div>  ⭐ {pick[2]<\div>
+        <\div>
         """, unsafe_allow_html=True)
 
     elif menu == "💰 Rekomendasi Harga":
