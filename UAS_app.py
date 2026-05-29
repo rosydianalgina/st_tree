@@ -508,7 +508,7 @@ else:
                             Rp{harga:,}
                             </div>
                             <div>
-                             ⭐ {rating}
+                             {"⭐"* rating}
                             </div>
                             </div>
                             """, unsafe_allow_html=True)
