@@ -336,7 +336,9 @@ st.markdown("""
 .title{
     font-size:60px;
     font-weight:900;
+}
 
+.title-text{
     background:linear-gradient(
         90deg,
         #ff512f,
@@ -346,8 +348,6 @@ st.markdown("""
 
     -webkit-background-clip:text;
     -webkit-text-fill-color:transparent;
-
-    text-shadow:0 4px 15px rgba(0,0,0,0.15);
 }
 
 .subtitle{
@@ -500,7 +500,11 @@ with col1:
 
     st.markdown("""
     <div class="header">
-    <div class="title">👨‍🍳 GG BITES 👨‍🍳</div>
+    <div class="title">
+    <span>🍱</span>
+    <span class="title-text">GG BITES</span>
+    <span>🍱</span>
+    </div>
     <div class="subtitle">
     Smart Food Recommendation & Ordering System
     </div>
