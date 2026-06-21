@@ -520,7 +520,7 @@ with col2:
 menu = st.sidebar.radio(
     "📋 MENU",
     [
-        "🍔 Order Menu",
+        "🍱 Order Menu",
         "🍟 Combo Recommendation",
         "🍕 Top Menu",
         "🎲 Random Pick",
