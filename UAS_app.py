@@ -11,7 +11,7 @@ from datetime import datetime
 # =========================================================
 st.set_page_config(
     page_title="GG BITES",
-    page_icon="🍔",
+    page_icon="🍱",
     layout="wide"
 )
 
@@ -65,7 +65,7 @@ class GGBitesGraph:
 
         self.kategori = {
 
-            "🍔 Makanan Berat": {
+            "🍱 Makanan Berat": {
 
                 "Bakso": [
                 ("Bakso Urat", 18000, 4),
@@ -500,7 +500,7 @@ with col1:
 
     st.markdown("""
     <div class="header">
-    <div class="title">🍔 GG BITES 🍔</div>
+    <div class="title">🍱 GG BITES 🍱</div>
     <div class="subtitle">
     Smart Food Recommendation & Ordering System
     </div>
@@ -590,7 +590,7 @@ if st.session_state.page == "cart":
 
             st.session_state.orders.append(data)
 
-            st.success("Pesanan berhasil dibuat 🍔")
+            st.success("Pesanan berhasil dibuat 🍱")
 
             st.session_state.cart = []
 
@@ -603,7 +603,7 @@ if st.session_state.page == "cart":
 # =========================================================
 else:
 
-    if menu == "🍔 Order Menu":
+    if menu == "🍱 Order Menu":
 
         for kategori, data_menu in app.kategori.items():
 
