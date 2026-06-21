@@ -549,6 +549,10 @@ else:
                         Rp{harga:,}
                         </div>
 
+                        <div>
+                        {"⭐" * rating}
+                        </div>
+
                         </div>
                         """, unsafe_allow_html=True)
 
@@ -605,15 +609,15 @@ else:
         st.title("🍕 Top Menu")
 
         top = [
-            ("🍔", "Double Beef Burger"),
-            ("🍕", "Pizza Supreme"),
-            ("🥩", "Wagyu Steak"),
-            ("🍵", "Premium Matcha Latte")
+            ("🍔", "Double Beef Burger",5),
+            ("🍕", "Pizza Supreme",5),
+            ("🥩", "Wagyu Steak",5),
+            ("🍵", "Premium Matcha Latte"5)
         ]
 
         cols = st.columns(4)
 
-        for i, (emoji, nama) in enumerate(top):
+        for i, (emoji, nama,rating) in enumerate(top):
 
             with cols[i]:
 
@@ -622,6 +626,7 @@ else:
                 <div class="food-emoji">{emoji}</div>
                 <div class="food-name">{nama}</div>
                 <div class="food-price">BEST SELLER</div>
+                <div>{"⭐" * rating}</div>
                 </div>
                 """, unsafe_allow_html=True)
 
@@ -640,9 +645,10 @@ else:
         <div class="food-emoji">🎲</div>
         <div class="food-name">{pick[0]}</div>
         <div class="food-price">Rp{pick[1]:,}</div>
+        <div>
+        {"⭐" * pick[2]}
         </div>
-        <div>  ⭐ {pick[2]}<\div>
-        <\div>
+        </div>
         """, unsafe_allow_html=True)
 
     elif menu == "💰 Rekomendasi Harga":
@@ -680,6 +686,9 @@ else:
                 <div class="food-emoji">💰</div>
                 <div class="food-name">{nama}</div>
                 <div class="food-price">Rp{harga:,}</div>
+                <div>
+                {"⭐" * rating}
+                </div>
                 </div>
                 """, unsafe_allow_html=True)
 
@@ -714,6 +723,9 @@ else:
                         <div class="food-emoji">🔍</div>
                         <div class="food-name">{nama}</div>
                         <div class="food-price">Rp{harga:,}</div>
+                        <div>
+                        {"⭐" * rating}
+                        </div>
                         </div>
                         """, unsafe_allow_html=True)
 
