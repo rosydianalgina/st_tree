@@ -320,7 +320,11 @@ st.markdown("""
 <style>
 
 .stApp{
-    background:#f8f7f4;
+    background:linear-gradient(
+        135deg,
+        #fff7fa,
+        #fffaf2
+    );
 }
 
 .header{
@@ -340,30 +344,46 @@ st.markdown("""
 }
 
 .food-card{
-    background:white;
+    background:linear-gradient(145deg,#ffffff,#f8f8f8);
     border-radius:25px;
     padding:20px;
     text-align:center;
     margin-bottom:20px;
     height:320px;
-    box-shadow:0 4px 15px rgba(0,0,0,0.08);
+
+    border:2px solid #ffe4ec;
+
+    box-shadow:
+        0 10px 25px rgba(0,0,0,0.12),
+        0 5px 10px rgba(255,79,139,0.15);
+
+    transition:all 0.3s ease;
 }
+.food-card:hover{
+    transform:translateY(-8px);
+    box-shadow:
+        0 18px 35px rgba(0,0,0,0.18),
+        0 8px 20px rgba(255,79,139,0.25);
+}
+
 
 .food-emoji{
     font-size:60px;
 }
 
 .food-name{
-    font-size:20px;
-    font-weight:bold;
+    font-size:22px;
+    font-weight:700;
     margin-top:10px;
+    color:#333;
 }
 
 .food-price{
     color:#ff4f8b;
-    font-size:24px;
+    font-size:26px;
     font-weight:bold;
     margin-top:10px;
+    text-shadow:0 0 8px rgba(255,79,139,0.25);
 }
 
 .category-title{
@@ -382,12 +402,22 @@ st.markdown("""
 
 .stButton>button{
     width:100%;
-    background:#ff4f8b;
+    background:linear-gradient(
+        135deg,
+        #ff4f8b,
+        #ff7eb3
+    );
+
     color:white;
     border:none;
     border-radius:15px;
-    height:45px;
+    height:50px;
     font-weight:bold;
+
+    box-shadow:
+        0 8px 20px rgba(255,79,139,0.3);
+
+    transition:all .3s ease;
 }
 
 .stButton>button:hover{
