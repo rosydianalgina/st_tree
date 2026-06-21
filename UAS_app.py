@@ -500,7 +500,7 @@ with col1:
 
     st.markdown("""
     <div class="header">
-    <div class="title">🍱 GG BITES 🍱</div>
+    <div class="title">👨‍🍳 GG BITES 👨‍🍳</div>
     <div class="subtitle">
     Smart Food Recommendation & Ordering System
     </div>
