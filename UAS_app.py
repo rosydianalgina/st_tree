@@ -354,6 +354,21 @@ st.markdown("""
     font-size:22px;
     color:#666;
 }
+@keyframes floating {
+
+    0%{
+        transform:translateY(0px);
+    }
+
+    50%{
+        transform:translateY(-10px);
+    }
+
+    100%{
+        transform:translateY(0px);
+    }
+
+}
 
 .food-card{
     background:linear-gradient(
@@ -376,6 +391,15 @@ st.markdown("""
         0 5px 15px rgba(255,79,139,.15);
 
     transition:.3s;
+    animation:floating 3s ease-in-out infinite;
+}
+
+.food-card:hover{
+    transform:translateY(-15px) scale(1.05);
+
+    box-shadow:
+        0 25px 40px rgba(0,0,0,.20),
+        0 12px 25px rgba(255,81,47,.35);
 }
 
 
