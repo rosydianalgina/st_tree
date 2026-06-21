@@ -278,7 +278,7 @@ class GGBitesGraph:
         self.graph_combo = {
 
             "Bakso": [
-                ("Es Krim", 20000, 5),
+                ("Es Jeruk Peras", 20000, 5),
                 ("Cilok", 15000, 4)
             ],
 
