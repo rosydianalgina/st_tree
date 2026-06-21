@@ -684,7 +684,7 @@ else:
                             st.markdown(f"""
                             <div class="food-card">
                             <div class="food-emoji">
-                            {app.emoji.get(nama,'🍽')}
+                            {app.emoji.get(nama,'🍊')}
                             </div>
                             <div class="food-name">
                             {nama}
