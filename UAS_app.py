@@ -322,8 +322,9 @@ st.markdown("""
 .stApp{
     background:linear-gradient(
         135deg,
-        #fff7fa,
-        #fffaf2
+        #fff5f5,
+        #fff9e6,
+        #eef8ff
     );
 }
 
@@ -333,9 +334,20 @@ st.markdown("""
 }
 
 .title{
-    font-size:55px;
-    font-weight:bold;
-    color:#ff4f8b;
+    font-size:60px;
+    font-weight:900;
+
+    background:linear-gradient(
+        90deg,
+        #ff512f,
+        #dd2476,
+        #ffb347
+    );
+
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+
+    text-shadow:0 4px 15px rgba(0,0,0,0.15);
 }
 
 .subtitle{
@@ -344,26 +356,26 @@ st.markdown("""
 }
 
 .food-card{
-    background:linear-gradient(145deg,#ffffff,#f8f8f8);
+    background:linear-gradient(
+        145deg,
+        #ffffff,
+        #fff5f8,
+        #fffdf6
+    );
+
     border-radius:25px;
     padding:20px;
     text-align:center;
     margin-bottom:20px;
     height:320px;
 
-    border:2px solid #ffe4ec;
+    border:none;
 
     box-shadow:
-        0 10px 25px rgba(0,0,0,0.12),
-        0 5px 10px rgba(255,79,139,0.15);
+        0 15px 30px rgba(0,0,0,.08),
+        0 5px 15px rgba(255,79,139,.15);
 
-    transition:all 0.3s ease;
-}
-.food-card:hover{
-    transform:translateY(-8px);
-    box-shadow:
-        0 18px 35px rgba(0,0,0,0.18),
-        0 8px 20px rgba(255,79,139,0.25);
+    transition:.3s;
 }
 
 
@@ -387,37 +399,65 @@ st.markdown("""
 }
 
 .category-title{
-    font-size:35px;
+    font-size:30px;
     font-weight:bold;
-    color:#333;
+
+    background:linear-gradient(
+        135deg,
+        #ff512f,
+        #f09819
+    );
+
+    color:white;
+
+    padding:15px 25px;
+    border-radius:15px;
+
     margin-top:30px;
+    margin-bottom:15px;
+
+    box-shadow:
+        0 8px 20px rgba(255,81,47,.25);
 }
 
 .sub-menu{
-    font-size:24px;
+    font-size:22px;
     font-weight:bold;
-    color:#ff4f8b;
+
+    background:linear-gradient(
+        135deg,
+        #667eea,
+        #764ba2
+    );
+
+    color:white;
+
+    padding:10px 20px;
+    border-radius:12px;
+
+    display:inline-block;
+
     margin-top:20px;
+    margin-bottom:15px;
 }
 
 .stButton>button{
     width:100%;
-    background:linear-gradient(
-        135deg,
-        #ff4f8b,
-        #ff7eb3
-    );
-
-    color:white;
     border:none;
     border-radius:15px;
     height:50px;
+
+    background:linear-gradient(
+        135deg,
+        #ff512f,
+        #dd2476
+    );
+
+    color:white;
     font-weight:bold;
 
     box-shadow:
-        0 8px 20px rgba(255,79,139,0.3);
-
-    transition:all .3s ease;
+        0 8px 20px rgba(221,36,118,.35);
 }
 
 .stButton>button:hover{
