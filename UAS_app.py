@@ -391,7 +391,6 @@ st.markdown("""
         0 5px 15px rgba(255,79,139,.15);
 
     transition:.3s;
-    animation:floating 3s ease-in-out infinite;
 }
 
 .food-card:hover{
