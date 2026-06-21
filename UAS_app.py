@@ -612,7 +612,7 @@ else:
             ("🍔", "Double Beef Burger",5),
             ("🍕", "Pizza Supreme",5),
             ("🥩", "Wagyu Steak",5),
-            ("🍵", "Premium Matcha Latte"5)
+            ("🍵", "Premium Matcha Latte",5)
         ]
 
         cols = st.columns(4)
